@@ -4,4 +4,4 @@ unprefix = function unprefix () {
   console.log( 'Unprefixing!' );
 }
 
-export default unprefixed;
+export default unprefix;
