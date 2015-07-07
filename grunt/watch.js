@@ -4,14 +4,15 @@ module.exports = {
     interrupt: true
   },
 
-  //babel: {
-  //  files: [
-  //    'es6/**/*.js'
-  //  ],
-  //  tasks: [
-  //    'newer:babel'
-  //  ]
-  //},
+  babel: {
+    files: [
+      'es6/**/*.js'
+    ],
+    tasks: [
+      //'newer:babel'
+      'webpack'
+    ]
+  },
 
   sass: {
     files: [
