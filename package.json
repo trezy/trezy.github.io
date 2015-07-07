@@ -1,0 +1,21 @@
+{
+  "name": "trezy.github.io",
+  "version": "0.1.0",
+  "description": "Mah website?",
+  "homepage": "http://trezy.com",
+  "author": "Trezy <tre@trezy.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "prepublish": "grunt dist",
+    "postinstall": "npm prune && bower install && bower prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trezy/trezy.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trezy/trezy.github.io/issues"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "trezy.github.io",
+  "version": "0.1.2",
+  "description": "Mah website?",
+  "homepage": "http://trezy.com",
+  "author": "Trezy <tre@trezy.com>",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
