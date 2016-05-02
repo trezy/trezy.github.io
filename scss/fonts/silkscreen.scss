@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'silkscreen';
+  src: url('/assets/silkscreen/slkscr-webfont.eot');
+  src: url('/assets/silkscreen/slkscr-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/silkscreen/slkscr-webfont.woff') format('woff'),
+       url('/assets/silkscreen/slkscr-webfont.ttf') format('truetype'),
+       url('/assets/silkscreen/slkscr-webfont.svg#silkscreennormal') format('svg');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'silkscreen';
+  src: url('/assets/silkscreen/slkscrb-webfont.eot');
+  src: url('/assets/silkscreen/slkscrb-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/silkscreen/slkscrb-webfont.woff') format('woff'),
+       url('/assets/silkscreen/slkscrb-webfont.ttf') format('truetype'),
+       url('/assets/silkscreen/slkscrb-webfont.svg#silkscreenbold') format('svg');
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'silkscreen';
+  src: url('/assets/silkscreen/slkscre-webfont.eot');
+  src: url('/assets/silkscreen/slkscre-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/silkscreen/slkscre-webfont.woff') format('woff'),
+       url('/assets/silkscreen/slkscre-webfont.ttf') format('truetype'),
+       url('/assets/silkscreen/slkscre-webfont.svg#silkscreen_expandedbold') format('svg');
+  font-stretch: expanded;
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'silkscreen';
+  src: url('/assets/silkscreen/slkscreb-webfont.eot');
+  src: url('/assets/silkscreen/slkscreb-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/silkscreen/slkscreb-webfont.woff') format('woff'),
+       url('/assets/silkscreen/slkscreb-webfont.ttf') format('truetype'),
+       url('/assets/silkscreen/slkscreb-webfont.svg#silkscreen_expandednormal') format('svg');
+  font-stretch: expanded;
+  font-style: normal;
+  font-weight: bold;
+}

@@ -1,0 +1,9 @@
+.editor-wrapper {
+  align-items: stretch;
+  display: flex;
+}
+
+.editor, .preview {
+  padding: 2rem;
+  width: 50%;
+}

@@ -1,11 +1,21 @@
 module.exports = {
-  app: {
+  appCSS: {
     options: {
       style: 'expanded'
     },
 
     files: {
-      'css/app.css': 'scss/app.scss'
+      'dist/app.css': 'scss/app.scss'
+    }
+  },
+
+  libCSS: {
+    options: {
+      style: 'expanded'
+    },
+
+    files: {
+      'dist/lib.css': 'scss/lib.scss'
     }
   }
 }

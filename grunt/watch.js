@@ -1,26 +1,45 @@
 module.exports = {
   options: {
-    spawn: true,
-    interrupt: true
+    interrupt: true,
+    livereload: true,
+    spawn: true
   },
 
-  babel: {
+  appJS: {
     files: [
-      'es6/**/*.js'
+      'bower.json',
+      'config.json',
+      'package.json',
+      'js/**/*.js',
+      'templates/**/*.hbs'
     ],
     tasks: [
-      //'newer:babel'
-      'webpack'
+      'buildJS'
     ]
   },
 
-  sass: {
+  appCSS: {
     files: [
-      'scss/**/*.scss'
+      'scss/**/*.scss',
+      '!scss/lib.scss'
     ],
     tasks: [
-      'sass',
-      'autoprefixer'
-    ]
+      'buildAppCSS'
+    ],
+    options: {
+      livereload: true
+    }
+  },
+
+  libCSS: {
+    files: [
+      'scss/lib.scss'
+    ],
+    tasks: [
+      'buildLibCSS'
+    ],
+    options: {
+      livereload: true
+    }
   }
 }

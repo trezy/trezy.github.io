@@ -1,24 +1,35 @@
 module.exports = {
   default: [
-    'server'
-  ],
-
-  server: [
     'build',
-    'connect:dev',
+    'server',
     'watch'
   ],
 
   build: [
     'clean',
-    'webpack',
-    'sass',
-    'autoprefixer'
+    'buildCSS',
+    'buildJS'
   ],
 
-  dist: [
-    'build',
-    'copy',
-    'processhtml'
+  buildJS: [
+    'webpack'
+  ],
+
+  buildCSS: [
+    'buildAppCSS',
+    'buildLibCSS'
+  ],
+
+  buildAppCSS: [
+    'sass:appCSS'
+  ],
+
+  buildLibCSS: [
+    'sass:libCSS'
+  ],
+
+  server: [
+    'configureProxies:app',
+    'connect'
   ]
 }

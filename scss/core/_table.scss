@@ -1,0 +1,13 @@
+table {}
+
+tbody th {
+  border-right-color: black;
+  border-right-style: dotted;
+  border-right-width: 1px;
+  padding-right: 1rem;
+  text-align: right;
+
+  + td {
+    padding-left: 1rem;
+  }
+}
