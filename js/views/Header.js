@@ -10,6 +10,9 @@ import template from 'templates/Header.hbs'
 export default class Header extends Backbone.Marionette.LayoutView {
   constructor (options) {
     options = _.extend({
+      attributes: {
+        role: 'banner'
+      },
       regions: {
         brand: '.brand',
         nav: 'nav'
