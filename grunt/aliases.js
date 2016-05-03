@@ -21,6 +21,7 @@ module.exports = {
   ],
 
   buildAppCSS: [
+    'sass_globbing',
     'sass:appCSS'
   ],
 
