@@ -12,7 +12,6 @@ export default class BlogList extends Backbone.Marionette.CompositeView {
     options = _.extend({
       childViewContainer: '#blog-list',
       childView: BlogListItemView,
-      className: 'application-main',
       tagName: 'main',
       template: template
     }, options || {})
