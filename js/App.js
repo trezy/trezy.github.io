@@ -9,12 +9,37 @@ import RootView from 'views/Root'
 
 
 export default class App extends Backbone.Marionette.Application {
+
+  /******************************************************************************\
+    Private Methods
+  \******************************************************************************/
+
+  _bindEvents () {
+    this.routerChannel.on('before:navigate', () => {
+      this.main.empty()
+    })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor () {
     super()
 
     // We need to use `.extend()` to pass in the routes because ES6 doesn't
     // allow properties to be set before initialization
     this.Router = new (Router.extend(Routes))
+
+    // Grab the application channel so we can use it to handle most events
+    this.channel = Backbone.Radio.channel('application')
+
+    // Grab the router channel so we can react to routing events
+    this.routerChannel = Backbone.Radio.channel('router')
   }
 
   onStart () {
@@ -33,5 +58,7 @@ export default class App extends Backbone.Marionette.Application {
     // Backbone.Intercept prevents anchors and form submissions from changing
     // the URL
     Backbone.Intercept.start()
+
+    this._bindEvents()
   }
 }

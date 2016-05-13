@@ -32,6 +32,9 @@ export default class Route extends Backbone.Marionette.Object {
     this.appChannel = Backbone.Radio.channel('application')
     this.routerChannel = Backbone.Radio.channel('router')
 
-    this.viewOptions = {}
+    this.viewOptions = {
+      tagName: 'main',
+      template: false
+    }
   }
 }

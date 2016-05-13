@@ -5,13 +5,16 @@ import 'backbone.intercept'
 import 'backbone.marionette'
 import 'backbone.radio'
 import 'backbone.stickit'
-import './shims/marionette.replaceElement'
 import './shims/backbone.radio'
-import './shims/stringToColor'
-import './shims/capitalize'
+import './shims/marionette.replaceElement'
 
 import marked from 'marked'
+import './shims/marked.latex'
+
 import Prism from 'prism'
+
+import './shims/capitalize'
+import './shims/stringToColor'
 
 import App from './App'
 

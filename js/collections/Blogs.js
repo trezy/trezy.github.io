@@ -21,7 +21,5 @@ export default class Blogs extends BaseCollection {
 
     this.model = Blog
     this.url = 'http://localhost:3001/blogs'
-
-    this.fetch()
   }
 }

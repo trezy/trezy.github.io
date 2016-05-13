@@ -21,7 +21,7 @@ export default class Blog extends BaseModel {
     let content = this.get('content')
 
     if (content) {
-      this.set('renderedContent', marked(content))
+      this.set('renderedContent', marked(content) || '')
     }
   }
 

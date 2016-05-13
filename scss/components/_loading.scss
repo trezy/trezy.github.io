@@ -1,0 +1,38 @@
+.loading {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &:after {
+    align-content: center;
+    align-items: center;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-name: progressive-border;
+    border-color: black;
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 0.3rem;
+    color: black;
+    content: 'Loading';
+    display: flex;
+    height: 10rem;
+    justify-content: center;
+    position: relative;
+    width: 10rem;
+    z-index: 2;
+  }
+
+  &:before {
+    background-color: rgba(255, 255, 255, 0.8);
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+}

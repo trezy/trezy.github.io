@@ -1,8 +1,10 @@
+import Route from './Route'
+
 import AboutRoute from 'routes/About'
 import BlogListRoute from 'routes/BlogList'
 import BlogRoute from 'routes/Blog'
 import ContactRoute from 'routes/Contact'
-import EditorRoute from 'routes/Editor'
+import MarkdownEditorRoute from 'routes/MarkdownEditor'
 import HomeRoute from 'routes/Home'
 import TweeterRoute from 'routes/Tweeter'
 
@@ -13,7 +15,7 @@ import TweeterRoute from 'routes/Tweeter'
 export default {
   routes: {
     'about(/)': new AboutRoute,
-    'blog/new(/)': new EditorRoute,
+    'blog/new(/)': new MarkdownEditorRoute,
     'blog/:name(/)': new BlogRoute,
     'blog(/)': new BlogListRoute,
     'contact(/)': new ContactRoute,

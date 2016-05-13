@@ -12,7 +12,7 @@ export default class Root extends Backbone.Marionette.LayoutView {
     options = _.extend({
       el: 'body',
       regions: {
-        footer: '.application-footer',
+        footer: 'footer',
         header: 'header',
         main: 'main'
       },

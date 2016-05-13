@@ -8,16 +8,23 @@ import BlogsCollection from 'collections/Blogs'
 
 export default class BlogList extends Route {
   onBeforeShow (params) {
-    if (!window.blogs) {
-      window.blogs = new BlogsCollection
-    }
+    return new Promise((resolve, reject) => {
+      if (!window.blogs) {
+        let blogs = new BlogsCollection
 
-    this.viewOptions = {
-      collection: window.blogs
-    }
+        window.blogs = blogs
+      }
 
-    this.view = BlogListView
+      this.viewOptions = {
+        collection: blogs
+      }
 
-    return Promise.resolve()
+      this.view = BlogListView
+
+      blogs.fetch({
+        error: reject,
+        success: resolve
+      })
+    })
   }
 }

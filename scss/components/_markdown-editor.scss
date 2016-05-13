@@ -1,0 +1,16 @@
+.markdown-editor {
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  flex-grow: 1;
+
+  [role=textbox], output {
+    overflow: auto;
+    padding: 2rem;
+    width: 50%;
+  }
+
+  [role=textbox] {
+    outline: none;
+  }
+}
