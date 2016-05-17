@@ -19,7 +19,7 @@ module.exports = {
               fn: function (match, script) {
                 return script + match
               }
-            }],
+            }]
           }),
           require('grunt-connect-proxy/lib/utils').proxyRequest,
           require('connect-pushstate')()

@@ -8,8 +8,13 @@ import template from 'templates/Header.hbs'
 
 
 export default class Header extends Backbone.Marionette.LayoutView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
+    options = _.extend(options || {}, {
       attributes: {
         role: 'banner'
       },
@@ -19,7 +24,7 @@ export default class Header extends Backbone.Marionette.LayoutView {
       },
       tagName: 'header',
       template: template
-    }, options || {})
+    })
 
     super(options)
   }

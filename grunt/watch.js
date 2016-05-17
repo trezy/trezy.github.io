@@ -21,6 +21,11 @@ module.exports = {
   appCSS: {
     files: [
       'scss/**/*.scss',
+      '!scss/_animations.scss',
+      '!scss/_colors.scss',
+      '!scss/_components.scss',
+      '!scss/_core.scss',
+      '!scss/_fonts.scss',
       '!scss/lib.scss'
     ],
     tasks: [

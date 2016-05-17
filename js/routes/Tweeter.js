@@ -7,17 +7,38 @@ import TweetsCollection from 'collections/Tweets'
 
 
 export default class Tweeter extends Route {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  loadData (params) {
+    return new Promise((resolve, reject) => {
+      this.viewOptions.collection = new TweetsCollection
+
+      if (!window.tweets) {
+        window.tweets = this.viewOptions.collection
+      }
+
+      let timer = setTimeout(reject, 5000)
+
+      this.viewOptions.collection.once('add', () => {
+        clearTimeout(timer)
+        resolve()
+      })
+    })
+  }
+
   onBeforeShow (params) {
-    if (!window.tweets) {
-      window.tweets = new TweetsCollection
-    }
-
-    this.viewOptions = {
-      collection: window.tweets
-    }
-
+    this.replaceElement = false
     this.view = TweeterView
+  }
 
-    return Promise.resolve()
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get title () {
+    return 'Tweets'
   }
 }

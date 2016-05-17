@@ -1,3 +1,5 @@
+# On Responsive Design: Part 1
+
 After reading through A List Apart's article [What I Learned About the Web in 2011](http://www.alistapart.com/articles/what-i-learned-about-the-web-in-2011/) I decided I needed to make a second effort at getting into mobile web design. This article chronicles the epic struggle between myself and the perils of designing for a screen that fits in my hand.
 
 <!--more-->

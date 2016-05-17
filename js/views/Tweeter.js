@@ -8,13 +8,19 @@ import template from 'templates/Tweeter.hbs'
 
 
 export default class Tweeter extends Backbone.Marionette.CompositeView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
-      childViewContainer: '#tweet-list',
+    options = _.extend(options || {}, {
+//      childViewContainer: '#tweets',
       childView: TweetView,
-      tagName: 'main',
+      className: 'tweets',
+      tagName: 'ol',
       template: template
-    }, options || {})
+    })
 
     super(options)
   }

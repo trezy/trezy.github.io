@@ -16,7 +16,21 @@ export default class App extends Backbone.Marionette.Application {
 
   _bindEvents () {
     this.routerChannel.on('before:navigate', () => {
+      // Add loading class to the main element if it's been referenced
+      if (this.main.el instanceof HTMLElement) {
+        this.main.el.classList.add('loading')
+      }
+
+      // Empty the main region to allow the original element to return
       this.main.empty()
+    })
+
+    this.routerChannel.on('navigate', (route) => {
+      // Remove the loading class on navigate
+      this.main.el.classList.remove('loading')
+
+      // Update the page title
+      this.title.innerHTML = `${route.title} | ${this.baseTitle}`
     })
   }
 
@@ -43,12 +57,20 @@ export default class App extends Backbone.Marionette.Application {
   }
 
   onStart () {
+    // Grab the title element. We'll use this reference to update the page
+    // title when we navigate
+    this.title = document.querySelector('title')
+    this.baseTitle = this.title.innerHTML
+
     // The RootView will render itself so that we don't need to do it manually
     this.RootView = new RootView
 
     // The `main` region is where we'll show pretty much every view so we'll
     // attach it to the app object for easy access
     this.main = this.RootView.getRegion('main')
+
+    // Bind application-wide events
+    this._bindEvents()
 
     // Start the router with push routing
     Backbone.history.start({
@@ -58,7 +80,5 @@ export default class App extends Backbone.Marionette.Application {
     // Backbone.Intercept prevents anchors and form submissions from changing
     // the URL
     Backbone.Intercept.start()
-
-    this._bindEvents()
   }
 }

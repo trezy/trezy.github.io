@@ -1,1 +1,9 @@
-<ol id="blog-list"></ol>
+{{#each groups}}
+  <dt>{{year}}</dt>
+  {{#each blogs}}
+    <dd>
+      <a href="/blog/{{attributes.filename}}/">{{attributes.title}}</a>
+      <small><time>{{attributes.displayDate}}</time></small>
+    </dd>
+  {{/each}}
+{{/each}}

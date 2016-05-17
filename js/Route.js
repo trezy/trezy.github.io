@@ -5,36 +5,69 @@ import Backbone from 'backbone'
 
 
 export default class Route extends Backbone.Marionette.Object {
-  show (params) {
-    this.onBeforeShow(params)
-    .then(() => {
-      if (!this.view) {
-        this.view = Backbone.Marionette.ItemView
-      }
 
-      app.main.show(new this.view(this.viewOptions), {
-        replaceElement: true
-      })
+  /******************************************************************************\
+    Private Methods
+  \******************************************************************************/
+
+  _show () {
+    app.main.show(new this.view(this.viewOptions), {
+      replaceElement: this.replaceElement
     })
   }
 
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  constructor (options) {
+    super()
+
+    this.appChannel = Backbone.Radio.channel('application')
+    this.routerChannel = Backbone.Radio.channel('router')
+
+    this.replaceElement = true
+    this.viewOptions = {
+      tagName: 'main',
+      template: false
+    }
+  }
+
   onBeforeShow (params) {
-    return Promise.resolve()
+    this.view = Backbone.Marionette.ItemView
   }
 
   onError (error) {
     console.error(error)
   }
 
-  constructor (options) {
-    super(options || {})
+  show (params) {
+    return new Promise((resolve, reject) => {
+      if (this.onBeforeShow) {
+        this.onBeforeShow(params)
+      }
 
-    this.appChannel = Backbone.Radio.channel('application')
-    this.routerChannel = Backbone.Radio.channel('router')
+      if (this.loadData) {
+        this.loadData(params)
+        .then(() => {
+          this._show()
 
-    this.viewOptions = {
-      tagName: 'main',
-      template: false
-    }
+          resolve()
+        })
+        .catch((error) => {
+          reject(error)
+          this.onError(error)
+        })
+
+      } else {
+        this._show()
+
+        resolve()
+      }
+    })
   }
 }

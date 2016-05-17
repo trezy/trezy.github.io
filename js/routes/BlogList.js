@@ -7,7 +7,12 @@ import BlogsCollection from 'collections/Blogs'
 
 
 export default class BlogList extends Route {
-  onBeforeShow (params) {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  loadData (params) {
     return new Promise((resolve, reject) => {
       if (!window.blogs) {
         let blogs = new BlogsCollection
@@ -15,10 +20,7 @@ export default class BlogList extends Route {
         window.blogs = blogs
       }
 
-      this.viewOptions = {
-        collection: blogs
-      }
-
+      this.viewOptions.collection = blogs
       this.view = BlogListView
 
       blogs.fetch({
@@ -26,5 +28,17 @@ export default class BlogList extends Route {
         success: resolve
       })
     })
+  }
+
+  onBeforeShow (params) {
+    this.replaceElement = false
+  }
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get title () {
+    return 'Blogs'
   }
 }

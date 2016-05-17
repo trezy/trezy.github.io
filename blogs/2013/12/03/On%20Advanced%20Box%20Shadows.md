@@ -1,3 +1,5 @@
+# On Advanced Box Shadows
+
 `box-shadow` is arguably one of the coolest things to come out of CSS3. However I've been creating shadows in Adobe Fireworks and Photoshop for years so I feel like I'm too constrained by CSS3's `box-shadow` implementation. In an effort to expand my boxy horizons, I set out on a quest to create some cooler shadows.<!--more-->
 
 **Disclaimer:** At the time of this writing filters and transforms still require browser prefixes to work, though filters will only work in Webkit browsers. I have omitted these prefixes from the code examples here for readability but they will be required if you intend to use these techniques.

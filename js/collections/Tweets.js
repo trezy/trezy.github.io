@@ -133,12 +133,12 @@ export default class Tweets extends BaseCollection {
     -model.get('date')
   }
 
-  constructor (options) {
-    options = _.extend({
+  constructor (models, options) {
+    options = _.extend(options || {}, {
       model: Tweet
-    }, options || {})
+    })
 
-    super(options)
+    super(models, options)
 
     this.socket = new WebSocket('ws://localhost:3001')
 
@@ -159,15 +159,18 @@ export default class Tweets extends BaseCollection {
     }
 
     tweets.forEach((tweet, index) => {
+      let adorableAvatar = `//api.adorable.io/avatars/48/${tweet.user.screen_name}.png`
+      let eightBitAvatar = `//eightbitavatar.herokuapp.com/?id=${tweet.user.screen_name}&s=male&size=48`
+
       tweets[index] = {
-        date: moment(tweet.created_at),
-        id: tweet.id,
+        date: moment(new Date(tweet.created_at)).fromNow(),
+        id: tweet.id_str,
         gallery: [],
         raw: tweet,
         renderedText: this._renderEntities(tweet.text, tweet.entities),
         text: tweet.text,
         user: {
-          avatar: tweet.user.profile_image_url,
+          avatar: tweet.user.profile_image_url || adorableAvatar,
           description: tweet.user.description,
           name: tweet.user.name,
           screen_name: tweet.user.screen_name

@@ -34,11 +34,13 @@ export default class Blog extends BaseModel {
   \******************************************************************************/
 
   constructor (model, options) {
+    super(model, options)
+
     if (model && model.date) {
-      model.date = new moment(model.date)
+      this.set('date', moment(model.date))
     }
 
-    super(model, options)
+    this.set('raw', model)
 
     this._renderContent()
     this._bindEvents()
@@ -56,17 +58,18 @@ export default class Blog extends BaseModel {
     return new Promise((resolve, reject) => {
       fetch('http://localhost:3001/blogs' + this.get('date').format('/YYYY/MM/DD/') + this.get('filename'))
       .then((response) => {
-        response.json()
-        .then((response) => {
-          Object.keys(response.data).forEach((key) => {
-            this.set(key, response.data[key])
-          })
-
-          this.set('loaded', true)
-
-          resolve(this)
-        })
+        return response.json()
       })
+      .then((response) => {
+        Object.keys(response.data).forEach((key) => {
+          this.set(key, response.data[key])
+        })
+
+        this.set('loaded', true)
+
+        resolve(this)
+      })
+      .catch(reject)
     })
   }
 }

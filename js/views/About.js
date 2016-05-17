@@ -7,11 +7,15 @@ import template from 'templates/About.hbs'
 
 
 export default class About extends Backbone.Marionette.ItemView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
-      tagName: 'main',
+    options = _.extend(options || {}, {
       template: template
-    }, options || {})
+    })
 
     super(options)
   }

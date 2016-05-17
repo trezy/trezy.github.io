@@ -7,14 +7,15 @@ import BlogModel from 'models/Blog'
 
 
 export default class MarkdownEditor extends Route {
-  onBeforeShow () {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  onBeforeShow (params) {
     let model = new BlogModel
 
     this.view = MarkdownEditorView
     this.viewOptions.model = model
-
-    window.model = model
-
-    return Promise.resolve()
   }
 }

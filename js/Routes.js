@@ -5,7 +5,6 @@ import BlogListRoute from 'routes/BlogList'
 import BlogRoute from 'routes/Blog'
 import ContactRoute from 'routes/Contact'
 import MarkdownEditorRoute from 'routes/MarkdownEditor'
-import HomeRoute from 'routes/Home'
 import TweeterRoute from 'routes/Tweeter'
 
 
@@ -20,6 +19,6 @@ export default {
     'blog(/)': new BlogListRoute,
     'contact(/)': new ContactRoute,
     'tweeter(/)': new TweeterRoute,
-    '*notfound': new HomeRoute
+    '*notfound': new AboutRoute
   }
 }

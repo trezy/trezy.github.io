@@ -8,11 +8,15 @@ import template from 'templates/MarkdownEditor.hbs'
 
 
 export default class MarkdownEditor extends Backbone.Marionette.ItemView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
-      tagName: 'main',
+    options = _.extend(options || {}, {
       template: template
-    }, options || {})
+    })
 
     super(options)
 

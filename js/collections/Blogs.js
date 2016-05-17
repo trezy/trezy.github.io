@@ -12,12 +12,12 @@ export default class Blogs extends BaseCollection {
     return -model.get('date')
   }
 
-  constructor (options) {
-    options = _.extend({
+  constructor (models, options) {
+    options = _.extend(options || {}, {
       model: Blog
-    }, options || {})
+    })
 
-    super(options)
+    super(models, options)
 
     this.model = Blog
     this.url = 'http://localhost:3001/blogs'

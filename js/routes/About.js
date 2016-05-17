@@ -6,9 +6,20 @@ import AboutView from 'views/About'
 
 
 export default class About extends Route {
-  onBeforeShow () {
-    this.view = AboutView
 
-    return Promise.resolve()
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  onBeforeShow (params) {
+    this.view = AboutView
+  }
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get title () {
+    return 'About Trezy'
   }
 }

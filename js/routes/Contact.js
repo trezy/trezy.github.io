@@ -6,9 +6,20 @@ import ContactView from 'views/Contact'
 
 
 export default class Contact extends Route {
-  onBeforeShow () {
-    this.view = ContactView
 
-    return Promise.resolve()
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  onBeforeShow (params) {
+    this.view = ContactView
+  }
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get title () {
+    return 'Contact Trezy'
   }
 }

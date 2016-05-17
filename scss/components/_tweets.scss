@@ -1,0 +1,18 @@
+.tweets {
+  list-style: none;
+  padding: 0;
+}
+
+.tweet {
+  display: flex;
+  margin-bottom: 2rem;
+
+  &:nth-child(even) {
+    background-color: lightgrey;
+  }
+
+  header {
+    flex-shrink: 0;
+    margin-right: 1rem;
+  }
+}

@@ -1,3 +1,5 @@
+# On Dropdown Menu Transitions
+
 The CSS transition property allows for a lot of really cool effects in your design but it has definitely caused me to bang my head against the desk a few times. Here are some details about the transition property that aren't very well documented.<!--more-->
 
 ***Disclaimer:*** At the time of this writing transitions still require browser prefixes to work for Firefox (`-moz-`), Opera (`-o-`), and Webkit (`-webkit-`). I have omitted them from the code examples here for readability, but they will be required if you intend to use these techniques.

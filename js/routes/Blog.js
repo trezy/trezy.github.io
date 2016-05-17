@@ -7,6 +7,11 @@ import BlogsCollection from 'collections/Blogs'
 
 
 export default class Blog extends Route {
+
+  /******************************************************************************\
+    Private Methods
+  \******************************************************************************/
+
   _getBlog (name) {
     return new Promise((resolve, reject) => {
       let blog = window.blogs.findWhere({
@@ -25,6 +30,7 @@ export default class Blog extends Route {
 
           resolve()
         })
+        .catch(reject)
 
       } else {
         reject('Couldn\'t find blog')
@@ -32,21 +38,48 @@ export default class Blog extends Route {
     })
   }
 
-  onBeforeShow (params) {
-    this.view = BlogView
 
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  loadData (params) {
     return new Promise((resolve, reject) => {
       if (!window.blogs) {
-        window.blogs = new BlogsCollection
-        window.blogs.once('sync', () => {
-          this._getBlog(params.name)
-          .then(resolve)
+        let blogs = new BlogsCollection
+
+        window.blogs = blogs
+
+        blogs.fetch({
+          error: reject,
+          success: () => {
+            this._getBlog(params.name)
+            .then(resolve)
+            .catch(reject)
+          }
         })
 
       } else {
         this._getBlog(params.name)
         .then(resolve)
+        .catch(reject)
       }
     })
+  }
+
+  onBeforeShow (params) {
+    this.replaceElement = false
+    this.view = BlogView
+  }
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get title () {
+    return this.viewOptions.model.get('title')
   }
 }

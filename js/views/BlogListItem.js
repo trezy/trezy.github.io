@@ -7,12 +7,17 @@ import template from 'templates/BlogListItem.hbs'
 
 
 export default class BlogListItem extends Backbone.Marionette.ItemView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
+    options = _.extend(options || {}, {
       className: 'blog',
       tagName: 'li',
       template: template
-    }, options || {})
+    })
 
     super(options)
   }

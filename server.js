@@ -150,9 +150,9 @@ router.get('/blogs/:year/:month/:day/:blog', function (request, response, next) 
         filename: blog,
         title: decodeURIComponent(blog)
       }
-    }
 
-    next()
+      next()
+    }
   })
 })
 
@@ -170,7 +170,9 @@ app.use(function (request, response) {
 
   response.model.meta.timing.end = new Date().toISOString()
 
-  response.send(response.model)
+//  setTimeout(() => {
+    response.send(response.model)
+//  }, 5000)
 })
 
 

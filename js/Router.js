@@ -5,9 +5,22 @@ import Backbone from 'backbone'
 
 
 export default class Router extends Backbone.BaseRouter {
+
+  /******************************************************************************\
+    Private Methods
+  \******************************************************************************/
+
   _bindEvents () {
     this.channel.on('route', this.navigate)
   }
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
 
   constructor () {
     super()
@@ -16,10 +29,11 @@ export default class Router extends Backbone.BaseRouter {
   }
 
   onNavigate (routeData) {
-    this.channel.trigger('before:navigate')
+    this.channel.trigger('before:navigate', routeData.linked)
 
     routeData.linked.show(routeData.params)
-
-    this.channel.trigger('navigate')
+    .then(() => {
+      this.channel.trigger('navigate', routeData.linked)
+    })
   }
 }

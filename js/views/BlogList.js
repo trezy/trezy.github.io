@@ -1,21 +1,83 @@
 import Backbone from 'backbone'
 
-import BlogListItemView from 'views/BlogListItem'
 import template from 'templates/BlogList.hbs'
 
 
 
 
 
-export default class BlogList extends Backbone.Marionette.CompositeView {
+export default class BlogList extends Backbone.Marionette.ItemView {
+
+  /******************************************************************************\
+    Private Methods
+  \******************************************************************************/
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
-      childViewContainer: '#blog-list',
-      childView: BlogListItemView,
-      tagName: 'main',
+    options = _.extend(options || {}, {
+      tagName: 'dl',
       template: template
-    }, options || {})
+    })
 
     super(options)
+
+    // Set the collection to reflect the transformations
+    this.model = new Backbone.Model({
+      groups: this.blogGroups
+    })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get blogGroups () {
+    // We need to modify the collection's data structure. The current structure
+    // doesn't lend itself to the type of display we're going for
+    return this.collection.chain()
+
+    // Create a clone of each model in the collection to avoid ruining our
+    // global blog collection, then set a display date for each blog
+    .mapObject((model) => {
+      model = model.clone()
+      model.set('displayDate', model.get('date').format('MMMM YYYY'))
+      return model
+    })
+
+    // Stick the models in arrays, grouped by year
+    .groupBy((model) => {
+      return model.get('date').format('YYYY')
+    })
+
+    // The previous transform sets dates as keys in an object. We need to push
+    // the date into the object
+    .mapObject((blogs, year) => {
+      return {
+        blogs: blogs,
+        year: year
+      }
+    })
+
+    // Sort the blogs newest to oldest
+    .sortBy((group) => {
+      return -group.year
+    })
+
+    // Convert the collection to an array, dumping the keys
+    .toArray()
+
+    // Return the final transformed object
+    .value()
   }
 }

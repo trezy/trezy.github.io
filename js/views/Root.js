@@ -8,8 +8,13 @@ import template from 'templates/Root.hbs'
 
 
 export default class Root extends Backbone.Marionette.LayoutView {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (options) {
-    options = _.extend({
+    options = _.extend(options || {}, {
       el: 'body',
       regions: {
         footer: 'footer',
@@ -17,7 +22,7 @@ export default class Root extends Backbone.Marionette.LayoutView {
         main: 'main'
       },
       template: template
-    }, options || {})
+    })
 
     super(options)
   }
