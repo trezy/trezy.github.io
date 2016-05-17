@@ -1,18 +1,82 @@
 .tweets {
   list-style: none;
   padding: 0;
+
+  > li {
+    margin-bottom: 5rem;
+  }
 }
 
 .tweet {
   display: flex;
   margin-bottom: 2rem;
 
-  &:nth-child(even) {
-    background-color: lightgrey;
+  div {
+    border-color: black;
+    border-radius: 0.4rem;
+    border-style: solid;
+    border-width: 0.2rem;
+    padding: 1rem;
+    position: relative;
+
+    &:after,
+    &:before {
+      border-color: transparent;
+      border-style: solid;
+      border-left-width: 0;
+      content: '';
+      position: absolute;
+      right: 100%;
+    }
+
+    &:after {
+      border-width: 1rem;
+      border-right-color: white;
+      top: 1.2rem;
+      z-index: 2;
+    }
+
+    &:before {
+      border-width: 1.3rem;
+      border-right-color: black;
+      top: 0.9rem;
+      z-index: 1;
+    }
   }
 
   header {
     flex-shrink: 0;
-    margin-right: 1rem;
+    margin-right: 2rem;
+
+    img {
+      border-color: black;
+      border-style: solid;
+      border-radius: 100%;
+      border-width: 0.2rem;
+    }
+  }
+
+  p {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  footer {
+    ul {
+      display: flex;
+      margin-bottom: 0;
+    }
+
+    li {
+      &:after {
+        content: '\b7';
+        margin: 0 1em;
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+    }
   }
 }

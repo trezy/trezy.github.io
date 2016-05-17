@@ -1,15 +1,21 @@
-<header>
-  <img title="@{{user.screen_name}}: {{user.description}}" src="{{user.avatar}}">
-</header>
+<article class="tweet">
+  <header>
+    <img title="@{{user.screen_name}}: {{user.description}}" src="{{user.avatar}}">
+  </header>
 
-<!--<a href="http://twitter.com/{{user.screen_name}}" title="{{user.description}}">@{{user.screen_name}}</a>: {{{renderedText}}}-->
+  <!--<a href="http://twitter.com/{{user.screen_name}}" title="{{user.description}}">@{{user.screen_name}}</a>: {{{renderedText}}}-->
+  <div>
+    <p>{{{renderedText}}}</p>
 
-<p>{{{renderedText}}}</p>
-
-<footer>
-  <nav>
-    <ul>
-      <li><a href="http://twitter.com/{{user.screen_name}}/status/{{id}}">Permalink</a></li>
-    </ul>
-  </nav>
-</footer>
+    <footer>
+      <nav>
+        <small>
+          <ul>
+            <li><time>{{date}}</time></li>
+            <li><a href="http://twitter.com/{{user.screen_name}}/status/{{id}}">Permalink</a></li>
+          </ul>
+        </small>
+      </nav>
+    </footer>
+  </div>
+</article>
