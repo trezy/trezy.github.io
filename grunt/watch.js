@@ -26,6 +26,7 @@ module.exports = {
       '!scss/_components.scss',
       '!scss/_core.scss',
       '!scss/_fonts.scss',
+      '!scss/_mixins.scss',
       '!scss/lib.scss'
     ],
     tasks: [

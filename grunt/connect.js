@@ -35,7 +35,21 @@ module.exports = {
 
         return middlewares
       },
-      port: 3000
-    }
+      port: config.server.port
+    },
+
+    proxies: [
+      {
+        context: [
+          '/api',
+          '/auth'
+        ],
+        headers: {
+          host: 'trezy.stamplayapp.com'
+        },
+        host: 'trezy.stamplayapp.com',
+        https: true
+      }
+    ]
   }
 }
