@@ -24,6 +24,12 @@ export default class BlogList extends Route {
       this.view = BlogListView
 
       blogs.fetch({
+        data: {
+          select: [
+            'dt_create',
+            'title'
+          ].join(',')
+        },
         error: reject,
         success: resolve
       })

@@ -48,24 +48,36 @@ export default class Blog extends Route {
 
   loadData (params) {
     return new Promise((resolve, reject) => {
-      if (!window.blogs) {
-        let blogs = new BlogsCollection
+      let blog
+      let blogs
 
+      if (window.blogs) {
+        blogs = window.blogs
+
+      } else {
+        blogs = new BlogsCollection
         window.blogs = blogs
+      }
 
-        blogs.fetch({
-          error: reject,
-          success: () => {
-            this._getBlog(params.name)
-            .then(resolve)
-            .catch(reject)
-          }
+      if (blogs.length) {
+        this.viewOptions.model = blogs.findWhere({
+          id: params.id
         })
 
       } else {
-        this._getBlog(params.name)
-        .then(resolve)
-        .catch(reject)
+        this.viewOptions.model = blogs.add({
+          id: params.id
+        })
+      }
+
+      if (this.viewOptions.model.get('loaded')) {
+        resolve()
+
+      } else {
+        this.viewOptions.model.fetch({
+          error: reject,
+          success: resolve
+        })
       }
     })
   }

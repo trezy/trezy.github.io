@@ -15,7 +15,7 @@ export default {
   routes: {
     'about(/)': new AboutRoute,
     'blog/new(/)': new MarkdownEditorRoute,
-    'blog/:name(/)': new BlogRoute,
+    'blog/:id(/)': new BlogRoute,
     'blog(/)': new BlogListRoute,
     'contact(/)': new ContactRoute,
     'tweeter(/)': new TweeterRoute,

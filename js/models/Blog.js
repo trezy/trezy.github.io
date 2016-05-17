@@ -15,6 +15,10 @@ export default class Blog extends BaseModel {
 
   _bindEvents () {
     this.on('change:content', this._renderContent)
+
+    this.on('sync', () => {
+      this.set('loaded', true)
+    })
   }
 
   _renderContent () {
@@ -36,8 +40,8 @@ export default class Blog extends BaseModel {
   constructor (model, options) {
     super(model, options)
 
-    if (model && model.date) {
-      this.set('date', moment(model.date))
+    if (!this.isNew()) {
+      this.set('created_at', moment(model.dt_create))
     }
 
     this.set('raw', model)
@@ -52,24 +56,5 @@ export default class Blog extends BaseModel {
       loaded: false,
       renderedContent: ''
     }
-  }
-
-  load () {
-    return new Promise((resolve, reject) => {
-      fetch('http://localhost:3001/blogs' + this.get('date').format('/YYYY/MM/DD/') + this.get('filename'))
-      .then((response) => {
-        return response.json()
-      })
-      .then((response) => {
-        Object.keys(response.data).forEach((key) => {
-          this.set(key, response.data[key])
-        })
-
-        this.set('loaded', true)
-
-        resolve(this)
-      })
-      .catch(reject)
-    })
   }
 }

@@ -20,6 +20,7 @@ export default class Blogs extends BaseCollection {
     super(models, options)
 
     this.model = Blog
-    this.url = 'http://localhost:3001/blogs'
+//    this.url = 'http://localhost:3001/blogs'
+    this.url = '/api/cobject/v1/blog'
   }
 }

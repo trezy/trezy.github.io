@@ -51,13 +51,13 @@ export default class BlogList extends Backbone.Marionette.ItemView {
     // global blog collection, then set a display date for each blog
     .mapObject((model) => {
       model = model.clone()
-      model.set('displayDate', model.get('date').format('MMMM YYYY'))
+      model.set('displayDate', model.get('created_at').format('MMMM YYYY'))
       return model
     })
 
     // Stick the models in arrays, grouped by year
     .groupBy((model) => {
-      return model.get('date').format('YYYY')
+      return model.get('created_at').format('YYYY')
     })
 
     // The previous transform sets dates as keys in an object. We need to push
