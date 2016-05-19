@@ -15,6 +15,9 @@ export default class MarkdownEditor extends Backbone.Marionette.ItemView {
 
   constructor (options) {
     options = _.extend(options || {}, {
+      events: {
+        'submit form': 'onSubmit'
+      },
       template: template
     })
 
@@ -22,7 +25,8 @@ export default class MarkdownEditor extends Backbone.Marionette.ItemView {
 
     this.ui = {
       editor: '[role=textbox]',
-      preview: 'output'
+      preview: 'output',
+      title: '#title'
     }
 
     this.bindings = {
@@ -35,12 +39,24 @@ export default class MarkdownEditor extends Backbone.Marionette.ItemView {
       'output': {
         observe: 'renderedContent',
         updateMethod: 'html'
-      }
+      },
+      '#title': 'title'
     }
   }
 
   onAttach () {
     this.ui.editor.focus()
     this.stickit()
+  }
+
+  onSubmit (event) {
+    this.model.save({
+      error: () => {
+        console.log('Error!')
+      },
+      success: () => {
+        console.log('Success!', this.model)
+      }
+    })
   }
 }

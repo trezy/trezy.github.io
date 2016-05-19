@@ -2,15 +2,32 @@
   align-content: stretch;
   align-items: stretch;
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+
+  fieldset {
+    align-content: stretch;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
 
   [role=textbox], output {
     overflow: auto;
-    padding: 2rem;
+    padding: 1rem;
     width: 50%;
   }
 
   [role=textbox] {
     outline: none;
+  }
+
+  menu {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-top: 1rem;
+    width: 100%;
   }
 }
