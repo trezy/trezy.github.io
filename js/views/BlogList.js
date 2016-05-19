@@ -63,8 +63,12 @@ export default class BlogList extends Backbone.Marionette.ItemView {
     // The previous transform sets dates as keys in an object. We need to push
     // the date into the object
     .mapObject((blogs, year) => {
+
+
       return {
-        blogs: blogs,
+        blogs: _.sortBy(blogs, (blog) => {
+          return -blog.get('created_at')
+        }),
         year: year
       }
     })
