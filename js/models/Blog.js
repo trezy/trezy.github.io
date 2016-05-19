@@ -46,6 +46,8 @@ export default class Blog extends BaseModel {
 
     this.set('raw', model)
 
+    this.url = '/api/cobject/v1/blog'
+
     this._renderContent()
     this._bindEvents()
   }
@@ -56,5 +58,14 @@ export default class Blog extends BaseModel {
       loaded: false,
       renderedContent: ''
     }
+  }
+
+  toJSON () {
+    let json = _.clone(this.attributes)
+
+    delete json.loaded
+    delete json.renderedContent
+
+    return json
   }
 }
