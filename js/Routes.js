@@ -14,7 +14,8 @@ import TweeterRoute from 'routes/Tweeter'
 export default {
   routes: {
     'about(/)': new AboutRoute,
-    'blog/new(/)': new MarkdownEditorRoute,
+    'blog/edit(/)': new MarkdownEditorRoute,
+    'blog/edit/:id(/)': new MarkdownEditorRoute,
     'blog/:id(/)': new BlogRoute,
     'blog(/)': new BlogListRoute,
     'contact(/)': new ContactRoute,
