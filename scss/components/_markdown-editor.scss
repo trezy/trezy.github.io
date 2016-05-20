@@ -5,6 +5,12 @@
   flex-direction: column;
   flex-grow: 1;
 
+  [name=title] {
+    @extend h1;
+
+    padding: 1rem;
+  }
+
   fieldset {
     align-content: stretch;
     align-items: stretch;
