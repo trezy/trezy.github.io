@@ -20,7 +20,9 @@ export default class Tweeter extends Route {
         window.tweets = this.viewOptions.collection
       }
 
-      let timer = setTimeout(reject, 5000)
+      let timer = setTimeout(() => {
+        reject(new Error('Couldn\'t load Tweets'))
+      }, 5000)
 
       this.viewOptions.collection.once('add', () => {
         clearTimeout(timer)

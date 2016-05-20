@@ -3,6 +3,8 @@ import moment from 'moment'
 import BaseCollection from 'collections/Base'
 import Tweet from 'models/Tweet'
 
+import config from '../../config.json'
+
 
 
 
@@ -146,7 +148,11 @@ export default class Tweets extends BaseCollection {
   }
 
   onMessage (event) {
-    this.add(this.parse(event.data))
+    if (event.status == 200) {
+      this.add(this.parse(event.data.message))
+    } else {
+      this.failed = true
+    }
   }
 
   parse (tweets) {

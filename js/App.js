@@ -18,6 +18,7 @@ export default class App extends Backbone.Marionette.Application {
     this.routerChannel.on('before:navigate', () => {
       // Add loading class to the main element if it's been referenced
       if (this.main.el instanceof HTMLElement) {
+        this.main.el.classList.remove('error')
         this.main.el.classList.add('loading')
       }
 
@@ -27,10 +28,18 @@ export default class App extends Backbone.Marionette.Application {
 
     this.routerChannel.on('navigate', (route) => {
       // Remove the loading class on navigate
-      this.main.el.classList.remove('loading')
+      this.main.el.classList.remove('error loading')
 
       // Update the page title
       this.title.innerHTML = `${route.title} | ${this.baseTitle}`
+    })
+
+    this.routerChannel.on('error', () => {
+      // Remove the loading class on navigate
+      if (this.main.el instanceof HTMLElement) {
+        this.main.el.classList.remove('loading')
+        this.main.el.classList.add('error')
+      }
     })
   }
 

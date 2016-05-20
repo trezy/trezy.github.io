@@ -35,39 +35,30 @@ export default class Route extends Backbone.Marionette.Object {
       tagName: 'main',
       template: false
     }
-  }
-
-  onBeforeShow (params) {
     this.view = Backbone.Marionette.ItemView
   }
 
-  onError (error) {
-    console.error(error)
+  // no-op, always return a Promise
+  loadData () {
+    return Promise.resolve()
+  }
+
+  // no-op
+  onBeforeShow (params) {
+    return
   }
 
   show (params) {
+    this.onBeforeShow(params)
+
     return new Promise((resolve, reject) => {
-      if (this.onBeforeShow) {
-        this.onBeforeShow(params)
-      }
-
-      if (this.loadData) {
-        this.loadData(params)
-        .then(() => {
-          this._show()
-
-          resolve()
-        })
-        .catch((error) => {
-          reject(error)
-          this.onError(error)
-        })
-
-      } else {
+      this.loadData(params)
+      .then(() => {
         this._show()
 
         resolve()
-      }
+      })
+      .catch(reject)
     })
   }
 }

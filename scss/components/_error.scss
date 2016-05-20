@@ -1,4 +1,4 @@
-.loading:empty {
+.error:empty {
   overflow: hidden;
   position: relative;
 
@@ -9,7 +9,7 @@
     border-radius: 100%;
     border-style: solid;
     border-width: 0.3rem;
-    color: black;
+    color: red;
     display: flex;
     height: 10rem;
     justify-content: center;
@@ -24,23 +24,25 @@
   &:after {
     animation-delay:
       0s,
-      1s;
+      0.5s;
     animation-duration:
-      1s,
-      4s;
+      0.5s,
+      2s;
     animation-fill-mode: forwards;
     animation-iteration-count:
       1,
       infinite;
     animation-name:
-      loading-start,
-      loading;
+      error-start,
+      error;
     border-color: currentColor;
     content: '';
   }
 
   &:before {
+    animation-duration: 0.5s;
+    animation-name: spin;
     border-color: transparent;
-    content: 'Loading';
+    content: 'Error';
   }
 }
