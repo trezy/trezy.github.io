@@ -10,7 +10,7 @@
     border-bottom-color: currentColor;
     border-left-color: currentColor;
     border-right-color: currentColor;
-    border-top-color: white;
+    border-top-color: transparent;
   }
 }
 
@@ -19,18 +19,18 @@
     border-bottom-color: currentColor;
     border-left-color: currentColor;
     border-right-color: currentColor;
-    border-top-color: white;
+    border-top-color: transparent;
   }
 
   25% {
     border-bottom-color: currentColor;
     border-left-color: currentColor;
-    border-right-color: white;
+    border-right-color: transparent;
     border-top-color: currentColor;
   }
 
   50% {
-    border-bottom-color: white;
+    border-bottom-color: transparent;
     border-left-color: currentColor;
     border-right-color: currentColor;
     border-top-color: currentColor;
@@ -38,7 +38,7 @@
 
   75% {
     border-bottom-color: currentColor;
-    border-left-color: white;
+    border-left-color: transparent;
     border-right-color: currentColor;
     border-top-color: currentColor;
   }
@@ -47,6 +47,6 @@
     border-bottom-color: currentColor;
     border-left-color: currentColor;
     border-right-color: currentColor;
-    border-top-color: white;
+    border-top-color: transparent;
   }
 }
