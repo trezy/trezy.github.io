@@ -5,10 +5,14 @@ import Backbone from 'backbone'
 
 
 export default class Base extends Backbone.Model {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   constructor (model, options) {
     super(model, options)
 
-    this.idAttribute = '_id'
     this.sync = new Backbone.Hoard.Control().getModelSync()
   }
 
@@ -19,5 +23,17 @@ export default class Base extends Backbone.Model {
     } else {
       return response
     }
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get idAttribute () {
+    return '_id'
   }
 }

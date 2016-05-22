@@ -8,19 +8,28 @@ import Blog from 'models/Blog'
 
 
 export default class Blogs extends BaseCollection {
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
   comparator (model) {
     return -model.get('date')
   }
 
-  constructor (models, options) {
-    options = _.extend(options || {}, {
-      model: Blog
-    })
 
-    super(models, options)
 
-    this.model = Blog
-//    this.url = 'http://localhost:3001/blogs'
-    this.url = '/api/cobject/v1/blog'
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get model () {
+    return Blog
+  }
+
+  get url () {
+    return '/api/cobject/v1/blog'
   }
 }

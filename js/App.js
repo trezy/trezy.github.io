@@ -4,6 +4,9 @@ import Router from './Router'
 import Routes from './Routes'
 import RootView from 'views/Root'
 
+import BlogsCollection from 'collections/Blogs'
+import TweetsCollection from 'collections/Tweets'
+
 
 
 
@@ -28,7 +31,7 @@ export default class App extends Backbone.Marionette.Application {
 
     this.routerChannel.on('navigate', (route) => {
       // Remove the loading class on navigate
-      this.main.el.classList.remove('error loading')
+      this.main.el.classList.remove('error', 'loading')
 
       // Update the page title
       this.title.innerHTML = `${route.title} | ${this.baseTitle}`
@@ -41,6 +44,24 @@ export default class App extends Backbone.Marionette.Application {
         this.main.el.classList.add('error')
       }
     })
+
+    this.channel.reply('blog', this._getBlog.bind(this))
+    this.channel.reply('blogs', this.blogs)
+    this.channel.reply('tweets', this.tweets)
+  }
+
+  _getBlog (id) {
+    let blog = this.blogs.findWhere({
+      id: id
+    })
+
+    if (!blog) {
+      blog = this.blogs.add({
+        id: id
+      })
+    }
+
+    return blog
   }
 
 
@@ -89,5 +110,29 @@ export default class App extends Backbone.Marionette.Application {
     // Backbone.Intercept prevents anchors and form submissions from changing
     // the URL
     Backbone.Intercept.start()
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get blogs () {
+    if (!this._blogs) {
+      this._blogs = new BlogsCollection
+    }
+
+    return this._blogs
+  }
+
+  get tweets () {
+    if (!this._tweets) {
+      this._tweets = new TweetsCollection
+    }
+
+    return this._tweets
   }
 }

@@ -14,16 +14,9 @@ export default class BlogList extends Route {
 
   loadData (params) {
     return new Promise((resolve, reject) => {
-      if (!window.blogs) {
-        let blogs = new BlogsCollection
+      this.viewOptions.collection = this.appChannel.request('blogs')
 
-        window.blogs = blogs
-      }
-
-      this.viewOptions.collection = blogs
-      this.view = BlogListView
-
-      blogs.fetch({
+      this.viewOptions.collection.fetch({
         data: {
           select: [
             'dt_create',
@@ -38,6 +31,7 @@ export default class BlogList extends Route {
 
   onBeforeShow (params) {
     this.replaceElement = false
+    this.view = BlogListView
   }
 
   /******************************************************************************\

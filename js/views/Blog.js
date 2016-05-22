@@ -14,10 +14,21 @@ export default class Blog extends Backbone.Marionette.ItemView {
 
   constructor (options) {
     options = _.extend(options || {}, {
-      tagName: 'article',
       template: template
     })
 
     super(options)
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get tagName () {
+    return 'article'
   }
 }

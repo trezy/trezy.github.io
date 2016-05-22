@@ -136,10 +136,6 @@ export default class Tweets extends BaseCollection {
   }
 
   constructor (models, options) {
-    options = _.extend(options || {}, {
-      model: Tweet
-    })
-
     super(models, options)
 
     try {
@@ -204,6 +200,10 @@ export default class Tweets extends BaseCollection {
   /******************************************************************************\
     Getters
   \******************************************************************************/
+
+  get model () {
+    return Tweet
+  }
 
   get url () {
     let url = `ws://${location.host}`

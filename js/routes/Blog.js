@@ -14,28 +14,7 @@ export default class Blog extends Route {
 
   loadData (params) {
     return new Promise((resolve, reject) => {
-      let blogs
-
-      if (window.blogs) {
-        blogs = window.blogs
-
-      } else {
-        blogs = new BlogsCollection
-        window.blogs = blogs
-      }
-
-      if (blogs.length) {
-        this.viewOptions.model = blogs.findWhere({
-          id: params.id
-        })
-
-      } else {
-        this.viewOptions.model = blogs.add({
-          id: params.id
-        })
-      }
-
-      console.log(params.id, this.viewOptions.model)
+      this.viewOptions.model = this.appChannel.request('blog', params.id)
 
       if (this.viewOptions.model.get('loaded')) {
         resolve()

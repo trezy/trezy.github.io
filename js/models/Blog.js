@@ -14,7 +14,9 @@ export default class Blog extends BaseModel {
   \******************************************************************************/
 
   _bindEvents () {
-    this.on('change:content', this._renderContent)
+    this.on('change:content', () => {
+      this._renderContent()
+    })
 
     this.on('sync', () => {
       this.set('loaded', true)
@@ -46,8 +48,6 @@ export default class Blog extends BaseModel {
 
     this.set('raw', model)
 
-    this.url = '/api/cobject/v1/blog'
-
     this._renderContent()
     this._bindEvents()
   }
@@ -60,12 +60,15 @@ export default class Blog extends BaseModel {
     }
   }
 
-  toJSON () {
-    let json = _.clone(this.attributes)
+  save () {
+    options || (options = {})
+    attributes || (attributes = _.clone(this.attributes))
 
-    delete json.loaded
-    delete json.renderedContent
+    delete attributes.loaded
+    delete attributes.renderedContent
 
-    return json
+    options.data = JSON.stringify(attributes)
+
+    return super.save.call(this, attributes, options)
   }
 }
