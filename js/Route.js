@@ -27,15 +27,9 @@ export default class Route extends Backbone.Marionette.Object {
   constructor (options) {
     super()
 
-    this.appChannel = Backbone.Radio.channel('application')
-    this.routerChannel = Backbone.Radio.channel('router')
-
-    this.replaceElement = true
     this.viewOptions = {
-      tagName: 'main',
       template: false
     }
-    this.view = Backbone.Marionette.ItemView
   }
 
   // no-op, always return a Promise
@@ -60,5 +54,37 @@ export default class Route extends Backbone.Marionette.Object {
       })
       .catch(reject)
     })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  get appChannel () {
+    return Backbone.Radio.channel('application')
+  }
+
+  get replaceElement () {
+    return true
+  }
+
+  get routerChannel () {
+    return Backbone.Radio.channel('router')
+  }
+
+  get tagName () {
+    return 'main'
+  }
+
+  get title () {
+    return 'Untitled'
+  }
+
+  get view () {
+    return Backbone.Marionette.ItemView
   }
 }

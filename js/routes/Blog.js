@@ -28,16 +28,19 @@ export default class Blog extends Route {
     })
   }
 
-  onBeforeShow (params) {
-    this.replaceElement = false
-    this.view = BlogView
-  }
-
   /******************************************************************************\
     Getters
   \******************************************************************************/
 
+  get replaceElement () {
+    return false
+  }
+
   get title () {
     return this.viewOptions.model.get('title')
+  }
+
+  get view () {
+    return BlogView
   }
 }

@@ -31,16 +31,19 @@ export default class Tweeter extends Route {
     })
   }
 
-  onBeforeShow (params) {
-    this.replaceElement = false
-    this.view = TweeterView
-  }
-
   /******************************************************************************\
     Getters
   \******************************************************************************/
 
+  get replaceElement () {
+    return false
+  }
+
   get title () {
     return 'Tweets'
+  }
+
+  get view () {
+    return TweeterView
   }
 }

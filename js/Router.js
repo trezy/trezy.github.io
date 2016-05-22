@@ -22,12 +22,6 @@ export default class Router extends Backbone.BaseRouter {
     Public Methods
   \******************************************************************************/
 
-  constructor () {
-    super()
-
-    this.channel = Backbone.Radio.channel('router')
-  }
-
   onNavigate (routeData) {
     this.channel.trigger('before:navigate', routeData.linked)
 
@@ -39,5 +33,17 @@ export default class Router extends Backbone.BaseRouter {
       console.log('error', error)
       this.channel.trigger('error')
     })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get channel () {
+    return Backbone.Radio.channel('router')
   }
 }

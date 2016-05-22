@@ -13,9 +13,26 @@ export default class MarkdownEditor extends Route {
   \******************************************************************************/
 
   onBeforeShow (params) {
-    let model = new BlogModel
+    this.viewOptions.model = this.model
+  }
 
-    this.view = MarkdownEditorView
-    this.viewOptions.model = model
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get model () {
+    if (!this._model) {
+      this._model = new BlogModel
+    }
+
+    return this._model
+  }
+
+  get view () {
+    return MarkdownEditorView
   }
 }

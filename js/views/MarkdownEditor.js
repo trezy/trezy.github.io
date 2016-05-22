@@ -28,20 +28,6 @@ export default class MarkdownEditor extends Backbone.Marionette.ItemView {
       preview: 'output',
       title: '#title'
     }
-
-    this.bindings = {
-      '[role=textbox]': {
-        observe: 'content',
-        getVal: ($el, event, options) => {
-          return $el[0].innerText || ' '
-        },
-      },
-      'output': {
-        observe: 'renderedContent',
-        updateMethod: 'html'
-      },
-      '#title': 'title'
-    }
   }
 
   onAttach () {
@@ -58,5 +44,29 @@ export default class MarkdownEditor extends Backbone.Marionette.ItemView {
         console.log('Success!', this.model)
       }
     })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get bindings () {
+    return {
+      '[role=textbox]': {
+        observe: 'content',
+        getVal: ($el, event, options) => {
+          return $el[0].innerText || ' '
+        },
+      },
+      'output': {
+        observe: 'renderedContent',
+        updateMethod: 'html'
+      },
+      '#title': 'title'
+    }
   }
 }

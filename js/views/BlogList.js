@@ -22,7 +22,6 @@ export default class BlogList extends Backbone.Marionette.ItemView {
 
   constructor (options) {
     options = _.extend(options || {}, {
-      tagName: 'dl',
       template: template
     })
 
@@ -83,5 +82,9 @@ export default class BlogList extends Backbone.Marionette.ItemView {
 
     // Return the final transformed object
     .value()
+  }
+
+  get tagName () {
+    return 'dl'
   }
 }

@@ -45,9 +45,9 @@ export default class App extends Backbone.Marionette.Application {
       }
     })
 
-    this.channel.reply('blog', this._getBlog.bind(this))
-    this.channel.reply('blogs', this.blogs)
-    this.channel.reply('tweets', this.tweets)
+    this.appChannel.reply('blog', this._getBlog.bind(this))
+    this.appChannel.reply('blogs', this.blogs)
+    this.appChannel.reply('tweets', this.tweets)
   }
 
   _getBlog (id) {
@@ -78,12 +78,6 @@ export default class App extends Backbone.Marionette.Application {
     // We need to use `.extend()` to pass in the routes because ES6 doesn't
     // allow properties to be set before initialization
     this.Router = new (Router.extend(Routes))
-
-    // Grab the application channel so we can use it to handle most events
-    this.channel = Backbone.Radio.channel('application')
-
-    // Grab the router channel so we can react to routing events
-    this.routerChannel = Backbone.Radio.channel('router')
   }
 
   onStart () {
@@ -134,5 +128,13 @@ export default class App extends Backbone.Marionette.Application {
     }
 
     return this._tweets
+  }
+
+  get appChannel () {
+    return Backbone.Radio.channel('application')
+  }
+
+  get routerChannel () {
+    return Backbone.Radio.channel('router')
   }
 }

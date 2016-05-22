@@ -14,10 +14,21 @@ export default class Tweeter extends Backbone.Marionette.ItemView {
 
   constructor (options) {
     options = _.extend(options || {}, {
-      tagName: 'li',
       template: template
     })
 
     super(options)
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get tagName () {
+    return 'li'
   }
 }

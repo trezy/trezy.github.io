@@ -15,13 +15,29 @@ export default class Tweeter extends Backbone.Marionette.CompositeView {
 
   constructor (options) {
     options = _.extend(options || {}, {
-//      childViewContainer: '#tweets',
-      childView: TweetView,
-      className: 'tweets',
-      tagName: 'ol',
       template: template
     })
 
     super(options)
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  get childView () {
+    return TweetView
+  }
+
+  get className () {
+    return 'tweets'
+  }
+
+  get tagName () {
+    return 'ol'
   }
 }

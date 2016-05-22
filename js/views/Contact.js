@@ -19,4 +19,16 @@ export default class Contact extends Backbone.Marionette.ItemView {
 
     super(options)
   }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get tagName () {
+    return 'main'
+  }
 }

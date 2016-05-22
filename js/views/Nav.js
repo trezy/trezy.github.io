@@ -14,10 +14,21 @@ export default class Nav extends Backbone.Marionette.ItemView {
 
   constructor (options) {
     options = _.extend(options || {}, {
-      tagName: 'nav',
       template: template
     })
 
     super(options)
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Public Methods
+  \******************************************************************************/
+
+  get tagName () {
+    return 'nav'
   }
 }
