@@ -142,16 +142,22 @@ export default class Tweets extends BaseCollection {
 
     super(models, options)
 
-    this.socket = new WebSocket('ws://localhost:3001')
+    try {
+      this.socket = new WebSocket(this.url)
 
-    this._bindEvents()
+      this._bindEvents()
+
+    } catch (error) {
+      this.trigger('error', error)
+    }
   }
 
   onMessage (event) {
     if (event.status == 200) {
       this.add(this.parse(event.data.message))
+
     } else {
-      this.failed = true
+      this.trigger('error', event.data)
     }
   }
 
@@ -189,5 +195,23 @@ export default class Tweets extends BaseCollection {
     })
 
     return tweets
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get url () {
+    let url = `ws://${location.host}`
+
+    if (location.port) {
+      url += `:${location.port}`
+    }
+
+    return url
   }
 }
