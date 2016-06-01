@@ -1,10 +1,10 @@
-@import 'reset';
-@import 'animations';
+@import 'variables';
+@import 'mixins';
 @import 'colors';
 @import 'fonts';
-@import 'mixins';
 
+@import 'reset';
 @import 'root';
-
+@import 'animations';
 @import 'components';
 @import 'core';

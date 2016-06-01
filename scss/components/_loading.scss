@@ -10,14 +10,14 @@
     border-width: 0.3rem;
     color: black;
     display: flex;
-    height: 10rem;
+    height: $loader-size;
     justify-content: center;
     left: 50%;
-    margin-left: -5rem;
-    margin-top: -5rem;
+    margin-left: -($loader-size / 2);
+    margin-top: -($loader-size / 2);
     position: absolute;
     top: 50%;
-    width: 10rem;
+    width: $loader-size;
   }
 
   &:after {

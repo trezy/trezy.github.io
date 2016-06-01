@@ -11,7 +11,7 @@ html, body {
 }
 
 html {
-  font-size: 10px;
+  font-size: 1vmax;
 }
 
 body {
@@ -19,6 +19,6 @@ body {
   align-items: stretch;
   display: flex;
   font-family: kong, sans-serif;
-  font-size: 12px;
+  font-size: calc(1vmax);
   line-height: 2;
 }
