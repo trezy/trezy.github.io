@@ -1,5 +1,7 @@
 ::-webkit-scrollbar {
   height: 2rem;
+  max-height: 20px;
+  max-width: 20px;
   width: 2rem;
 }
 

@@ -6,12 +6,12 @@ header[role=banner] {
   border-right-width: 1px;
   color: black;
   display: flex;
-//  display: none;
   flex-direction: column;
   flex-shrink: 0;
+  max-width: 30vw;
   overflow: scroll;
   text-align: center;
-  width: 30vw;
+  width: 30vmax;
 
   .brand {
     font-size: 3em;

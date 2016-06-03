@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-overflow: ellipsis;
 }
 
 html, body {
@@ -18,7 +20,7 @@ body {
   align-content: stretch;
   align-items: stretch;
   display: flex;
-  font-family: kong, sans-serif;
-  font-size: calc(1vmax);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1vmax;
   line-height: 2;
 }
