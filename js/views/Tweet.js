@@ -6,25 +6,11 @@ import template from 'templates/Tweet.hbs'
 
 
 
-export default class Tweet extends Backbone.Marionette.LayoutView {
-
-  /******************************************************************************\
-    Public Methods
-  \******************************************************************************/
-
-
-
-
+export default class Tweet extends Backbone.Marionette.ItemView {
 
   /******************************************************************************\
     Getters
   \******************************************************************************/
-
-  get regions () {
-    return this._regions = {
-      media: '.media'
-    }
-  }
 
   get tagName () {
     return 'li'
@@ -32,17 +18,5 @@ export default class Tweet extends Backbone.Marionette.LayoutView {
 
   get template () {
     return template
-  }
-
-
-
-
-
-  /******************************************************************************\
-    Setters
-  \******************************************************************************/
-
-  set regions (value) {
-    this._regions = value
   }
 }

@@ -7,6 +7,24 @@
   <div>
     <p>{{{renderedText}}}</p>
 
+    {{#if media.length}}
+      <ol class="media-list">{{#each media}}
+        <li>
+          {{#if isPhoto}}
+            <a
+               class="media {{sizes.thumb.resize}}"
+               href="{{media_url}}"
+               style="
+                      background-image: url({{media_url}});
+                      height: {{sizes.thumb.h}}px;
+                      width: {{sizes.thumb.w}}px;
+                      ">
+            </a>
+          {{/if}}
+        </li>
+      {{/each}}</ol>
+    {{/if}}
+
     <footer>
       <nav>
         <small>

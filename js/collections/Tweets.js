@@ -17,13 +17,13 @@ export default class Tweets extends BaseCollection {
 
   _bindEvents () {
     this.socket.onmessage = this.onMessage.bind(this)
-//    this.on('add', this._limit)
+    this.on('add', this._limit)
   }
 
   _limit () {
     if (this.length > 100) {
       this.remove(this.min((model) => {
-        return model.attributes.timestamp_ms
+        return model.get('created_at')
       }))
     }
   }
@@ -172,10 +172,14 @@ export default class Tweets extends BaseCollection {
       let adorableAvatar = `//api.adorable.io/avatars/48/${tweet.user.screen_name}.png`
       let eightBitAvatar = `//eightbitavatar.herokuapp.com/?id=${tweet.user.screen_name}&s=male&size=48`
 
+      let created_at = moment(new Date(tweet.created_at))
+
       tweets[index] = {
-        date: moment(new Date(tweet.created_at)).fromNow(),
-        id: tweet.id_str,
+        created_at: created_at,
+        date: created_at.fromNow(),
         gallery: [],
+        id: tweet.id_str,
+        media: [],
         raw: tweet,
         renderedText: this._renderEntities(tweet.text, tweet.entities),
         text: tweet.text,
@@ -187,8 +191,19 @@ export default class Tweets extends BaseCollection {
         }
       }
 
-      if (tweet.entities.extended_entities || tweet.entities.expanded_entities) {
-        console.log(tweet)
+      if (tweet.extended_entities) {
+        tweet.extended_entities.media.forEach((media) => {
+          let recognizedMediaTypes = ['photo']
+
+          if (recognizedMediaTypes.indexOf(media.type) === -1) {
+            console.error('Unrecognized media type:', media.type)
+            return
+          }
+
+          media['is' + capitalize(media.type)] = true
+
+          tweets[index].media.push(media)
+        })
       }
     })
 
