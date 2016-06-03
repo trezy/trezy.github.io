@@ -32,6 +32,10 @@ export default class MarkdownEditor extends Route {
     return this._model
   }
 
+  get replaceElement () {
+    return false
+  }
+
   get view () {
     return MarkdownEditorView
   }
