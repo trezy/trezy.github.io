@@ -13,20 +13,6 @@ export default class Root extends Backbone.Marionette.LayoutView {
     Public Methods
   \******************************************************************************/
 
-  constructor (options) {
-    options = _.extend(options || {}, {
-      el: 'body',
-      regions: {
-        footer: 'footer',
-        header: 'header',
-        main: 'main'
-      },
-      template: template
-    })
-
-    super(options)
-  }
-
   initialize () {
     this.render()
   }
@@ -35,5 +21,41 @@ export default class Root extends Backbone.Marionette.LayoutView {
     this.getRegion('header').show(new HeaderView, {
       replaceElement: true
     })
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Getters
+  \******************************************************************************/
+
+  get el () {
+    return 'body'
+  }
+
+  get regions () {
+    return this._regions = {
+      footer: 'footer',
+      header: 'header',
+      main: 'main'
+    }
+  }
+
+  get template () {
+    return template
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Setters
+  \******************************************************************************/
+
+  set regions (value) {
+    this._regions = value
   }
 }
