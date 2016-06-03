@@ -30,7 +30,7 @@ export default class Router extends Backbone.BaseRouter {
       this.channel.trigger('navigate', routeData.linked)
     })
     .catch((error) => {
-      console.log('error', error)
+      console.error(error)
       this.channel.trigger('error')
     })
   }
