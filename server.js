@@ -34,20 +34,30 @@ let ws = new (require('ws').Server)({
 
 try {
   ws.on('connection', (client) => {
+    console.log('New websocket connection!')
+
     twitter.get('statuses/user_timeline', RESTOptions, (error, tweets, response) => {
-      client.send(JSON.stringify(tweets))
+      console.log('Got Twitter log:', tweets.length, 'tweets')
+      console.log('')
+      tweets.forEach((tweet) => {
+        client.send(JSON.stringify({
+          message: tweet,
+          status: 200
+        }))
+      })
     })
   })
 
   twitter.stream('statuses/filter', streamOptions, (stream) => {
+    console.log('Connecting to Twitter feed')
     stream.on('data', (tweet) => {
+      console.log('tweet', tweet.text)
+      console.log('')
       ws.clients.forEach((client) => {
-        let json = {
+        client.send(JSON.stringify({
           message: tweet,
           status: 200
-        }
-
-        client.send(JSON.stringify(json))
+        }))
       })
     })
   })

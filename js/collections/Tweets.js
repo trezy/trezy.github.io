@@ -149,11 +149,13 @@ export default class Tweets extends BaseCollection {
   }
 
   onMessage (event) {
-    if (event.status == 200) {
-      this.add(this.parse(event.data.message))
+    let data = JSON.parse(event.data)
+
+    if (data.status == 200) {
+      this.add(this.parse(data.message))
 
     } else {
-      this.trigger('error', event.data)
+      this.trigger('error', data)
     }
   }
 
@@ -206,12 +208,6 @@ export default class Tweets extends BaseCollection {
   }
 
   get url () {
-    let url = `ws://${location.host}`
-
-    if (location.port) {
-      url += `:${location.port}`
-    }
-
-    return url
+    return 'ws://' + (config.api.host || location.hostname) + ':' + (config.api.port || (location.port ? location.port : '80'))
   }
 }
