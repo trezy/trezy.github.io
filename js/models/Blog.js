@@ -27,7 +27,13 @@ export default class Blog extends BaseModel {
     let content = this.get('content')
 
     if (content) {
-      this.set('renderedContent', marked(content) || '')
+      try {
+        this.set('renderedContent', marked(content) || '')
+
+      } catch (error) {
+        this.set('renderedContent', marked('Failed to render the content for this blog. :-('))
+        this.trigger('error', error)
+      }
     }
   }
 
@@ -48,7 +54,6 @@ export default class Blog extends BaseModel {
 
     this.set('raw', model)
 
-    this._renderContent()
     this._bindEvents()
   }
 
