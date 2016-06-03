@@ -51,15 +51,21 @@ export default class App extends Backbone.Marionette.Application {
   }
 
   _getBlog (id) {
+    console.log('Getting blog', id)
+
     let blog = this.blogs.findWhere({
-      id: id
+      _id: id
     })
+
+    console.log('blog:', blog)
 
     if (!blog) {
       blog = this.blogs.add({
-        id: id
+        _id: id
       })
     }
+
+    console.log('blog:', blog)
 
     return blog
   }
