@@ -7,7 +7,7 @@ import template from 'templates/Tweeter.hbs'
 
 
 
-export default class Tweeter extends Backbone.Marionette.CompositeView {
+export default class Tweeter extends Backbone.Marionette.CollectionView {
 
   /******************************************************************************\
     Public Methods

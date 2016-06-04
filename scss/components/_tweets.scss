@@ -8,6 +8,15 @@
 }
 
 .tweet {
+  animation-duration:
+    1s,
+    1s;
+  animation-iteration-count:
+    1,
+    1;
+  animation-name:
+    fade-in,
+    slide-in-from-left;
   display: flex;
   margin-bottom: 2rem;
 
