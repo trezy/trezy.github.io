@@ -1,3 +1,5 @@
+import _ from 'underscore'
+import Backbone from 'backbone'
 import moment from 'moment'
 
 import BaseCollection from 'collections/Base'
@@ -17,6 +19,7 @@ export default class Tweets extends BaseCollection {
 
   _bindEvents () {
     this.socket.onmessage = this.onMessage.bind(this)
+
     this.on('add', this._limit)
   }
 
@@ -25,6 +28,12 @@ export default class Tweets extends BaseCollection {
       this.remove(this.min((model) => {
         return model.get('created_at')
       }))
+    }
+  }
+
+  _processQueue () {
+    if (this.queue.length) {
+      this.add(this.queue.pop())
     }
   }
 
@@ -123,6 +132,19 @@ export default class Tweets extends BaseCollection {
     return ret
   }
 
+  _startQueue () {
+    let interval = setInterval(() => {
+      if (this.scheduler) {
+        clearInterval(interval)
+
+        this.scheduler.schedule('processTweets', this._processQueue, {
+          context: this,
+          framerate: 1
+        })
+      }
+    }, 50)
+  }
+
 
 
 
@@ -132,16 +154,18 @@ export default class Tweets extends BaseCollection {
   \******************************************************************************/
 
   comparator (model) {
-    -model.get('date')
+    return model.get('created_at')
   }
 
   constructor (models, options) {
     super(models, options)
 
+    this.queue = []
+
     try {
       this.socket = new WebSocket(this.url)
-
       this._bindEvents()
+      this._startQueue()
 
     } catch (error) {
       this.trigger('error', error)
@@ -152,62 +176,59 @@ export default class Tweets extends BaseCollection {
     let data = JSON.parse(event.data)
 
     if (data.status == 200) {
-      this.add(this.parse(data.message))
+      this.queue.push(this.parse(data.message))
+      this.queue = _.sortBy(this.queue, (model) => {
+        return -model.created_at
+      })
 
     } else {
       this.trigger('error', data)
     }
   }
 
-  parse (tweets) {
-    if (typeof tweets === 'string') {
-      tweets = JSON.parse(tweets)
+  parse (tweet) {
+    if (typeof tweet === 'string') {
+      tweet = JSON.parse(tweet)
     }
 
-    if (!Array.isArray(tweets)) {
-      tweets = [tweets]
+    let adorableAvatar = `//api.adorable.io/avatars/48/${tweet.user.screen_name}.png`
+    let eightBitAvatar = `//eightbitavatar.herokuapp.com/?id=${tweet.user.screen_name}&s=male&size=48`
+
+    let created_at = moment(new Date(tweet.created_at))
+
+    let ret = {
+      created_at: created_at,
+      date: created_at.fromNow(),
+      gallery: [],
+      id: tweet.id_str,
+      media: [],
+      raw: tweet,
+      renderedText: this._renderEntities(tweet.text, tweet.entities),
+      text: tweet.text,
+      user: {
+        avatar: tweet.user.profile_image_url || adorableAvatar,
+        description: tweet.user.description,
+        name: tweet.user.name,
+        screen_name: tweet.user.screen_name
+      }
     }
 
-    tweets.forEach((tweet, index) => {
-      let adorableAvatar = `//api.adorable.io/avatars/48/${tweet.user.screen_name}.png`
-      let eightBitAvatar = `//eightbitavatar.herokuapp.com/?id=${tweet.user.screen_name}&s=male&size=48`
+    if (tweet.extended_entities) {
+      tweet.extended_entities.media.forEach((media) => {
+        let recognizedMediaTypes = ['photo']
 
-      let created_at = moment(new Date(tweet.created_at))
-
-      tweets[index] = {
-        created_at: created_at,
-        date: created_at.fromNow(),
-        gallery: [],
-        id: tweet.id_str,
-        media: [],
-        raw: tweet,
-        renderedText: this._renderEntities(tweet.text, tweet.entities),
-        text: tweet.text,
-        user: {
-          avatar: tweet.user.profile_image_url || adorableAvatar,
-          description: tweet.user.description,
-          name: tweet.user.name,
-          screen_name: tweet.user.screen_name
+        if (recognizedMediaTypes.indexOf(media.type) === -1) {
+          console.error('Unrecognized media type:', media.type)
+          return
         }
-      }
 
-      if (tweet.extended_entities) {
-        tweet.extended_entities.media.forEach((media) => {
-          let recognizedMediaTypes = ['photo']
+        media['is' + capitalize(media.type)] = true
 
-          if (recognizedMediaTypes.indexOf(media.type) === -1) {
-            console.error('Unrecognized media type:', media.type)
-            return
-          }
+        ret.media.push(media)
+      })
+    }
 
-          media['is' + capitalize(media.type)] = true
-
-          tweets[index].media.push(media)
-        })
-      }
-    })
-
-    return tweets
+    return ret
   }
 
 
@@ -220,6 +241,10 @@ export default class Tweets extends BaseCollection {
 
   get model () {
     return Tweet
+  }
+
+  get scheduler () {
+    return Backbone.Radio.channel('application').request('scheduler')
   }
 
   get url () {
