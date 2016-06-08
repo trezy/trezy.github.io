@@ -1,4 +1,5 @@
 import Backbone from 'backbone'
+import Rafael from 'rafael'
 
 import Router from './Router'
 import Routes from './Routes'
@@ -48,6 +49,8 @@ export default class App extends Backbone.Marionette.Application {
     this.appChannel.reply('blog', this._getBlog.bind(this))
     this.appChannel.reply('blogs', this.blogs)
     this.appChannel.reply('tweets', this.tweets)
+
+    this.appChannel.reply('scheduler', this.scheduler)
   }
 
   _getBlog (id) {
@@ -122,6 +125,14 @@ export default class App extends Backbone.Marionette.Application {
     return this._blogs
   }
 
+  get scheduler () {
+    if (!this._scheduler) {
+      this._scheduler = new Rafael
+    }
+
+    return this._scheduler
+  }
+
   get tweets () {
     if (!this._tweets) {
       this._tweets = new TweetsCollection
@@ -131,10 +142,18 @@ export default class App extends Backbone.Marionette.Application {
   }
 
   get appChannel () {
-    return Backbone.Radio.channel('application')
+    if (!this._appChannel) {
+      this._appChannel = Backbone.Radio.channel('application')
+    }
+
+    return this._appChannel
   }
 
   get routerChannel () {
-    return Backbone.Radio.channel('router')
+    if (!this._routerChannel) {
+      this._routerChannel = Backbone.Radio.channel('router')
+    }
+
+    return this._routerChannel
   }
 }
