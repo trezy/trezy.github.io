@@ -3,24 +3,29 @@
   padding: 0;
 
   > li {
-    margin-bottom: 5rem;
+    animation-delay: 0s;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+    animation-name: grow-height;
+    animation-timing-function: ease;
   }
 }
 
 .tweet {
-  animation-duration:
-    1s,
-    1s;
-  animation-iteration-count:
-    1,
-    1;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
   animation-name:
     fade-in,
     slide-in-from-left;
   display: flex;
   margin-bottom: 2rem;
+  overflow: hidden;
+  transform-style: preserve-3d;
 
   div {
+    background-color: white;
     border-color: black;
     border-radius: 0.4rem;
     border-style: solid;
