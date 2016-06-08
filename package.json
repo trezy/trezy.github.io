@@ -13,6 +13,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-runtime": "^6.6.1",
     "bower-webpack-plugin": "^0.1.9",
+    "connect-livereload": "^0.5.4",
     "connect-pushstate": "^1.0.0",
     "express": "^4.13.4",
     "grunt": "^0.4.5",
@@ -28,17 +29,15 @@
     "json-loader": "^0.5.4",
     "load-grunt-config": "^0.19.1",
     "node-sass": "^3.4.2",
+    "rafael": "^4.3.0",
     "serve-static": "^1.10.2",
     "time-grunt": "^1.3.0",
+    "twitter": "^1.2.5",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "ws": "^1.1.0"
   },
   "engines": {
     "node": ">=5"
-  },
-  "devDependencies": {
-    "connect-livereload": "^0.5.4",
-    "twitter": "^1.2.5",
-    "ws": "^1.1.0"
   }
 }
