@@ -24,7 +24,7 @@ export default class Tweets extends BaseCollection {
   }
 
   _limit () {
-    if (this.length > 100) {
+    if (this.length > 10) {
       this.remove(this.min((model) => {
         return model.get('created_at')
       }))
@@ -154,7 +154,7 @@ export default class Tweets extends BaseCollection {
   \******************************************************************************/
 
   comparator (model) {
-    return model.get('created_at')
+    return -model.get('created_at')
   }
 
   constructor (models, options) {

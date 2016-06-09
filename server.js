@@ -25,7 +25,7 @@ let streamOptions = {
   follow: config.twitter.user_id
 }
 let RESTOptions = {
-  count: 100,
+  count: 10,
   user_id: config.twitter.user_id
 }
 let ws = new (require('ws').Server)({
