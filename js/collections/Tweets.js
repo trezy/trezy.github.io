@@ -139,7 +139,7 @@ export default class Tweets extends BaseCollection {
 
         this.scheduler.schedule('processTweets', this._processQueue, {
           context: this,
-          framerate: 1
+          framerate: 30
         })
       }
     }, 50)
