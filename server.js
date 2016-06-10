@@ -20,12 +20,13 @@ let port = config.api.port || process.env.PORT
 // SOCKET
 // =============================================================================
 
+let tweetCache = []
 let twitter = new Twitter(config.twitter)
 let streamOptions = {
   follow: config.twitter.user_id
 }
 let RESTOptions = {
-  count: 10,
+  count: config.twitter.limit,
   user_id: config.twitter.user_id
 }
 let ws = new (require('ws').Server)({
@@ -33,32 +34,42 @@ let ws = new (require('ws').Server)({
 })
 
 try {
-  ws.on('connection', (client) => {
-    console.log('New websocket connection!')
+  twitter.get('statuses/user_timeline', RESTOptions, (error, tweets, response) => {
+    console.log('Got Twitter log:', tweets.length, 'tweets')
+    console.log('')
 
-    twitter.get('statuses/user_timeline', RESTOptions, (error, tweets, response) => {
-      console.log('Got Twitter log:', tweets.length, 'tweets')
-      console.log('')
-      tweets.forEach((tweet) => {
-        client.send(JSON.stringify({
-          message: tweet,
-          status: 200
-        }))
+    tweets.forEach((tweet) => {
+      tweetCache.push({
+        message: tweet,
+        status: 200
       })
+    })
+  })
+
+  ws.on('connection', (client) => {
+    console.log(`New websocket connection! Sending ${tweetCache.length} tweets...`)
+
+    tweetCache.forEach((tweet) => {
+      client.send(JSON.stringify(tweet))
     })
   })
 
   twitter.stream('statuses/filter', streamOptions, (stream) => {
     console.log('Connecting to Twitter feed')
     stream.on('data', (tweet) => {
-      console.log('tweet', tweet.text)
-      console.log('')
       ws.clients.forEach((client) => {
-        client.send(JSON.stringify({
+        tweet = {
           message: tweet,
           status: 200
-        }))
+        }
+
+        tweetCache.push(tweet)
+        client.send(JSON.stringify(tweet))
       })
+
+      while (tweetCache.length > config.twitter.limit) {
+        tweetCache.shift()
+      }
     })
   })
 
