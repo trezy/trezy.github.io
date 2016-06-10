@@ -15,14 +15,18 @@ export default class Tweeter extends Route {
     return new Promise((resolve, reject) => {
       this.viewOptions.collection = this.appChannel.request('tweets')
 
-      let timer = setTimeout(() => {
-        reject(new Error('Couldn\'t load Tweets'))
-      }, 5000)
+      if (!this.viewOptions.collection.length) {
+        let timer = setTimeout(() => {
+          reject(new Error('Couldn\'t load Tweets'))
+        }, 5000)
 
-      this.viewOptions.collection.once('add', () => {
-        clearTimeout(timer)
+        this.viewOptions.collection.once('add', () => {
+          clearTimeout(timer)
+          resolve()
+        })
+      } else {
         resolve()
-      })
+      }
     })
   }
 
