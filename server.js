@@ -4,7 +4,6 @@
 // =============================================================================
 
 // Import libraries
-let _ = require('underscore')
 let Twitter = require('twitter')
 let WebSocketServer = require('ws').Server
 
