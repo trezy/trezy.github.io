@@ -11,7 +11,7 @@ let config = require('../config')
 module.exports = {
   app: {
     options: {
-      keepalive: config.server.keepalive,
+      keepalive: config.server.keepalive || false,
 
       middleware: function (connect, options) {
         let middlewares = [
