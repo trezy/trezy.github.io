@@ -1,4 +1,4 @@
-import katex from 'katex'
+import katex from 'KaTeX'
 import marked from 'marked'
 
 marked.InlineLexer.output = function(src) {
