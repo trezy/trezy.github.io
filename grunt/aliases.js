@@ -29,6 +29,13 @@ module.exports = {
     'sass:libCSS'
   ],
 
+  dist: [
+    'build',
+    'cssmin',
+    'uglify',
+    'server'
+  ],
+
   server: [
     'configureProxies:app',
     'connect'

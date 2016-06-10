@@ -11,6 +11,8 @@ let config = require('../config')
 module.exports = {
   app: {
     options: {
+      keepalive: config.server.keepalive,
+
       middleware: function (connect, options) {
         let middlewares = [
           require('connect-livereload')({
