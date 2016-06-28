@@ -20,6 +20,8 @@ header[role=banner] {
   }
 
   nav {
+    position: relative;
+
     ul {
       align-content: stretch;
       display: flex;
@@ -34,9 +36,11 @@ header[role=banner] {
       }
     }
 
-    a {
+    a,
+    label {
       background-color: white;
       color: inherit;
+      cursor: pointer;
       display: block;
       outline: none;
       padding: 2rem;
@@ -56,6 +60,24 @@ header[role=banner] {
         span {
           border-width: 1px;
         }
+      }
+    }
+
+    input[type=checkbox][data-subnav] {
+      display: none;
+
+      &:not(:checked) + [data-subnav] {
+        left: 100%;
+      }
+
+      + [data-subnav] {
+        background-color: white;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: left 0.5s;
       }
     }
   }
