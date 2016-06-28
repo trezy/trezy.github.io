@@ -51,6 +51,16 @@ module.exports = {
         },
         host: 'trezy.stamplayapp.com',
         https: true
+      },
+
+      {
+        context: [
+          '/img'
+        ],
+        host: 's3.amazonaws.com',
+        rewrite: {
+          '^/img': '/trezy-image'
+        }
       }
     ]
   }
