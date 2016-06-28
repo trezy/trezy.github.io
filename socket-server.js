@@ -10,7 +10,7 @@ let WebSocketServer = require('ws').Server
 // Import config
 let config = require('./config')
 
-let port = config.api.port || process.env.PORT
+let port = config.socket.port || process.env.PORT
 
 
 

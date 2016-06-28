@@ -248,6 +248,6 @@ export default class Tweets extends BaseCollection {
   }
 
   get url () {
-    return 'ws://' + (config.api.host || location.hostname) + ':' + (config.api.port || (location.port ? location.port : '80'))
+    return 'ws://' + (config.socket.host || location.hostname) + ':' + (config.socket.port || (location.port ? location.port : '80'))
   }
 }

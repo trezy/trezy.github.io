@@ -11,7 +11,7 @@ let config = require('../config')
 module.exports = {
   app: {
     options: {
-      keepalive: config.server.keepalive || false,
+      keepalive: config.http.keepalive || false,
 
       middleware: function (connect, options) {
         let middlewares = [
@@ -37,7 +37,7 @@ module.exports = {
 
         return middlewares
       },
-      port: config.server.port
+      port: process.env.PORT || config.http.port
     },
 
     proxies: [
