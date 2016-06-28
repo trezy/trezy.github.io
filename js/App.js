@@ -36,6 +36,10 @@ export default class App extends Backbone.Marionette.Application {
 
       // Update the page title
       this.title.innerHTML = `${route.title} | ${this.baseTitle}`
+
+      // Update analytics
+      ga('set', 'page', location.pathname)
+      ga('send', 'pageview')
     })
 
     this.routerChannel.on('error', () => {
