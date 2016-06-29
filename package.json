@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "js/index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "$(npm bin)/grunt"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
