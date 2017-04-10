@@ -1,0 +1,93 @@
+.laser-beams {
+  background-image: radial-gradient(
+    ellipse closest-corner at 50% 50%,
+    hsla(random(360), 100%, 50%, 0.4),
+    black 60%
+  );
+  background-position: 50% 50vh;
+  background-repeat: no-repeat;
+  position: relative;
+
+  > *:not(.laser-beam) {
+    background-color: rgba(white, 0.5);
+    position: relative;
+    z-index: 1;
+
+  }
+
+  &.invert > *:not(.laser-beam) {
+    background-color: rgba(black, 0.5);
+  }
+
+  .laser-beam {
+    animation-iteration-count: infinite;
+    border-bottom-width: 0;
+    border-color: transparent;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 100vmax;
+    border-style: solid;
+    bottom: 0;
+    height: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 100%;
+    width: 0;
+
+    &:before {
+      border-bottom-width: 0;
+      border-color: transparent;
+      border-left-width: 10px;
+      border-right-width: 10px;
+      border-style: solid;
+      border-top-width: 100vmax;
+      content: '';
+      display: block;
+      filter: blur(1px);
+      height: 0;
+      left: -10px;
+      position: absolute;
+      top: -100vmax;
+      width: 0;
+    }
+
+    &:nth-of-type(even) {
+      animation-name: laser-right;
+      right: 0;
+    }
+
+    &:nth-of-type(odd) {
+      animation-name: laser-left;
+      left: 0;
+    }
+
+    @for $i from 1 through 8 {
+      &:nth-of-type(#{$i}) {
+        $delay: random(10);
+        $duration: max(3, random(10));
+        $saturation: random(360);
+
+        animation-delay: -#{$delay}s;
+        animation-duration: #{$duration}s;
+        border-top-color: hsla($saturation, 100%, 50%, 0.8);
+
+        &:before {
+          border-top-color: hsla($saturation, 100%, 70%, 0.6);
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes laser-left {
+  0% { transform: rotateZ(5deg); }
+  50% { transform: rotateZ(85deg); }
+  100% { transform: rotateZ(5deg); }
+}
+
+@-webkit-keyframes laser-right {
+  0% { transform: rotateZ(-5deg); }
+  50% { transform: rotateZ(-85deg); }
+  100% { transform: rotateZ(-5deg); }
+}

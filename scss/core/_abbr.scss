@@ -3,4 +3,8 @@ abbr {
   border-bottom-style: dotted;
   border-bottom-width: 1px;
   cursor: help;
+
+  .invert & {
+    border-bottom-color: white;
+  }
 }

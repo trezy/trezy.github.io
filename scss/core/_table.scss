@@ -1,4 +1,14 @@
-table {}
+table {
+  width: 100%;
+}
+
+thead {
+  font-weight: bold;
+
+  th {
+    text-align: left;
+  }
+}
 
 tbody th {
   padding-right: 1rem;

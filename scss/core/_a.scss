@@ -3,11 +3,19 @@ a {
   &:link,
   &:visited {
     color: blue;
+
+    .invert & {
+      color: deepskyblue;
+    }
   }
 
   &:focus,
   &:hover {
     color: red;
     outline: none;
+
+    .invert & {
+      color: red;
+    }
   }
 }

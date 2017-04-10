@@ -1,21 +1,35 @@
 button {
-  @include text-outline(black);
-
   background-color: transparent;
   background-image: none;
   border: none;
-  color: white;
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
   margin: 0;
   outline: none;
   padding: 1rem 2rem;
 
-  &:hover {
-    box-shadow: 0 0 0 1px black inset;
+  &:not([disabled]) {
+    @include text-outline(black);
+    @extend %grid-background;
+
+    color: white;
+
+    &:hover {
+      box-shadow: 0 0 0 1px black inset;
+    }
+
+    .invert & {
+      @include text-outline(white);
+
+      background-color: white;
+      color: black;
+    }
   }
 
-  &[type=submit] {
-    @extend %grid-background;
+  &[disabled] {
+    background-color: lightgrey;
+    cursor: default;
+    opacity: 0.5
   }
 }

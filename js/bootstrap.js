@@ -13,8 +13,10 @@ import './shims/marked.latex'
 
 import Prism from 'prism'
 
-import './shims/capitalize'
-import './shims/stringToColor'
+import './shims/Array.reorder'
+import './shims/String.capitalize'
+import './shims/String.toHash'
+import './shims/String.toColor'
 
 import App from './App'
 
