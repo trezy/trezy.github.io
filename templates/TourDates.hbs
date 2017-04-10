@@ -1,0 +1,51 @@
+<h1>Tour Dates</h1>
+
+<p>Come see your favorite rapper, <abbr title="Yup.">Big Trezy</abbr>, dropping sick beats and sweet rhymes on his Scotch O'Clock Tour! He'll be performing songs from his most recent album, <a href="//schematical.com">Schematical</a>, as well as a few classics from his previous self-titled album, <a href="//adorable.io">Adorable</a>.</p>
+
+<p><a href="//clickaction.studio">MathematiKyle</a> will be opening each show by dropping the bass from his latest single, <abbr title="Fail F^@#ing Fast">FFF</abbr>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+
+      <th>Venue</th>
+
+      <th>Tickets</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each events}}
+      <tr>
+        <td>{{date}}</td>
+
+        <td>{{venue.name}} &mdash; {{venue.location}}</td>
+
+        <td>
+          {{#if ticketCount}}
+            <a
+               class="buy-tickets"
+               data-amount="5000"
+               data-description="Big Trezy at {{venue.name}} - {{date}}"
+               data-name="Concert Tickets"
+               href="">
+              Buy Tickets
+            </a>
+          {{else}}
+            😞 Sold Out
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>
+<div class="laser-beam"></div>

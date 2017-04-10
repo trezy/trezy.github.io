@@ -50,11 +50,23 @@ export default class App extends Backbone.Marionette.Application {
       }
     })
 
-    this.appChannel.reply('blog', this._getBlog.bind(this))
+    this.appChannel.reply('blog', this._getBlog)
     this.appChannel.reply('blogs', this.blogs)
     this.appChannel.reply('tweets', this.tweets)
 
     this.appChannel.reply('scheduler', this.scheduler)
+
+    this.appChannel.reply('route', this._generateRoute)
+  }
+
+  _generateRoute (options) {
+    return new Promise((resolve, reject) => {
+      this.DirectionsService.route(options, (results, status) => {
+        if (status == 'OK') {
+          resolve(results.routes[0])
+        }
+      })
+    })
   }
 
   _getBlog (id) {
@@ -81,6 +93,9 @@ export default class App extends Backbone.Marionette.Application {
 
   constructor () {
     super()
+
+    this._generateRoute = this._generateRoute.bind(this)
+    this._getBlog = this._getBlog.bind(this)
 
     // We need to use `.extend()` to pass in the routes because ES6 doesn't
     // allow properties to be set before initialization
@@ -127,6 +142,14 @@ export default class App extends Backbone.Marionette.Application {
     }
 
     return this._blogs
+  }
+
+  get DirectionsService () {
+    if (!this._DirectionsService) {
+      this._DirectionsService = new google.maps.DirectionsService()
+    }
+
+    return this._DirectionsService
   }
 
   get scheduler () {

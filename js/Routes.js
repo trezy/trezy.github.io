@@ -6,6 +6,7 @@ import BlogRoute from 'routes/Blog'
 import ContactRoute from 'routes/Contact'
 import GifsRoute from 'routes/Gifs'
 import MarkdownEditorRoute from 'routes/MarkdownEditor'
+import TourDatesRoute from 'routes/TourDates'
 import TweeterRoute from 'routes/Tweeter'
 
 
@@ -22,6 +23,7 @@ export default {
     'contact(/)': new ContactRoute,
     'gifs(/)': new GifsRoute,
     'tweeter(/)': new TweeterRoute,
+    'tour-dates(/)': new TourDatesRoute,
     '*notfound': new AboutRoute
   }
 }

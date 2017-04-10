@@ -4,5 +4,12 @@ main {
   flex-direction: column;
   flex-grow: 1;
   overflow: scroll;
+  overflow-x: hidden;
   padding: 2rem;
+  position: relative;
+
+  &.invert {
+    background-color: black;
+    color: white;
+  }
 }
