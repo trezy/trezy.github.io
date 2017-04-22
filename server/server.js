@@ -46,12 +46,12 @@ if (config.ssl) {
   httpServ = https.createServer({
     key: fs.readFileSync(config.ssl.key),
     cert: fs.readFileSync(config.ssl.cert),
-  }, app.callback()).listen(config.port)
+  }, app.callback())
 
 } else {
   let http = require('http')
 
-  httpServ = http.createServer(app.callback()).listen(config.port)
+  httpServ = http.createServer(app.callback())
 }
 
 
