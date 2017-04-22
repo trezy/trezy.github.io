@@ -30,13 +30,11 @@ module.exports = function (app, config) {
     Proxy API requests
   \******************************************************************************/
 
-  let apiContexts = [
-    '/api',
-    '/auth',
-  ]
-
-  app.use(proxy(apiContexts, {
+  let apiOptions = {
     changeOrigin: true,
     target: 'https://trezy.stamplayapp.com',
-  }))
+  }
+
+  app.use(proxy('/api', apiOptions))
+  app.use(proxy('/auth', apiOptions))
 }
