@@ -6,6 +6,10 @@ module.exports = {
   http: {
     port: process.env.TREZY_WEB_PORT,
     ssl: false,
+//    ssl: {
+//      cert: '',
+//      key: '',
+//    },
   },
   twitter: {
     access_token_key: process.env.TREZY_TWITTER_ACCESS_TOKEN_KEY,
