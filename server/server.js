@@ -39,19 +39,19 @@ require('./config/router')(app, config)
 
 let httpServ
 
-if (config.http.ssl) {
+if (config.ssl) {
   let fs = require('fs')
   let https = require('https')
 
   httpServ = https.createServer({
-    key: fs.readFileSync(config.http.ssl.key),
-    cert: fs.readFileSync(config.http.ssl.cert),
-  }, app.callback()).listen(config.http.port)
+    key: fs.readFileSync(config.ssl.key),
+    cert: fs.readFileSync(config.ssl.cert),
+  }, app.callback()).listen(config.port)
 
 } else {
   let http = require('http')
 
-  httpServ = http.createServer(app.callback()).listen(config.http.port)
+  httpServ = http.createServer(app.callback()).listen(config.port)
 }
 
 
@@ -72,5 +72,5 @@ require('./config/socket')(httpServ, config)
   Start the server
 \******************************************************************************/
 
-httpServ.listen(config.http.port)
-console.log('Listening on port', config.http.port)
+httpServ.listen(config.port)
+console.log('Listening on port', config.port)
