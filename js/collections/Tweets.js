@@ -248,6 +248,6 @@ export default class Tweets extends BaseCollection {
   }
 
   get url () {
-    return location.origin.replace(/https?\:\/\//, 'ws://')
+    return location.origin.replace('http://', 'ws://').replace('https://', 'wss://')
   }
 }
