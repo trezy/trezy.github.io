@@ -1,15 +1,8 @@
 module.exports = {
-  socket: {
-    port: process.env.TREZY_SOCKET_PORT,
-    ssl: false,
-  },
-  http: {
-    port: process.env.TREZY_WEB_PORT,
-    ssl: false,
-//    ssl: {
-//      cert: '',
-//      key: '',
-//    },
+  port: process.env.TREZY_WEB_PORT,
+  ssl: process.env.NODE_ENV !== 'production' ? false : {
+    cert: process.env.TREZY_SSL_CERT,
+    key: process.env.TREZY_SSL_KEY,
   },
   twitter: {
     access_token_key: process.env.TREZY_TWITTER_ACCESS_TOKEN_KEY,
