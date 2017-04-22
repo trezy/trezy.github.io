@@ -4,6 +4,7 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
+    "build": "$(npm bin)/grunt build",
     "postinstall": "$(npm bin)/bower install",
     "start": "$(npm bin)/grunt"
   },
