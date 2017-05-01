@@ -23,6 +23,7 @@ export default class TourDates extends Backbone.Marionette.ItemView {
     super(options)
 
     this.checkout = StripeCheckout.configure({
+      bitcoin: true,
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       key: 'pk_test_OygaX8csOevuyeSayisllVva',
       locale: 'auto',

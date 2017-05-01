@@ -24,13 +24,17 @@ export default class TourDates extends Route {
 
     for (let eventIndex = 0; eventIndex < 25; eventIndex++) {
       let event = {
+        availableTickets: 0,
         date: null,
         ticketCount: null,
+        totalTickets: 0,
         venue: null
       }
 
       let seed = new Seed(Math.abs((anchorPoint.valueOf() * (eventIndex + 1)).toString().toHash()))
       event.venue = venues[Math.round(seed.toPercentage() * venues.length)]
+      event.totalTickets = new Seed(event.venue.name.toHash()).compile()
+      event.availableTickets = event.totalTickets
       events.push(event)
     }
 

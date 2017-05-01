@@ -23,14 +23,14 @@
         <td>{{venue.name}} &mdash; {{venue.location}}</td>
 
         <td>
-          {{#if ticketCount}}
+          {{#if availableTickets}}
             <a
                class="buy-tickets"
                data-amount="5000"
                data-description="Big Trezy at {{venue.name}} - {{date}}"
                data-name="Concert Tickets"
                href="">
-              Buy Tickets
+              Buy Tickets ({{availableTickets}}/{{totalTickets}})
             </a>
           {{else}}
             😞 Sold Out
