@@ -35,8 +35,10 @@ module.exports = function (app, config) {
     '/auth',
   ]
 
-  app.use(proxy(apiContexts, {
-    changeOrigin: true,
-    target: 'https://trezy.stamplayapp.com',
-  }))
+  apiContexts.forEach(context => {
+    app.use(proxy(context, {
+      changeOrigin: true,
+      target: 'https://trezy.stamplayapp.com',
+    }))
+  })
 }
