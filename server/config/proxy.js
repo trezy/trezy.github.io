@@ -13,6 +13,23 @@ const proxy = require('koa-proxies')
 module.exports = function (app, config) {
 
   /******************************************************************************\
+    Proxy Imgur requests
+  \******************************************************************************/
+
+  app.use(proxy('/imgur', {
+    changeOrigin: true,
+    headers: {
+      Authorization: `Client-ID ${process.env.TREZY_IMGUR_CLIENT_ID}`
+    },
+    rewrite: path => path.replace(/^\/imgur/, '/'),
+    target: 'https://api.imgur.com/3',
+  }))
+
+
+
+
+
+  /******************************************************************************\
     Proxy image requests
   \******************************************************************************/
 
