@@ -1,13 +1,13 @@
 import _ from 'underscore'
 
-import BaseCollection from 'collections/Base'
+import BaseAPICollection from 'collections/BaseAPI'
 import Blog from 'models/Blog'
 
 
 
 
 
-export default class Blogs extends BaseCollection {
+export default class Blogs extends BaseAPICollection {
 
   /******************************************************************************\
     Public Methods

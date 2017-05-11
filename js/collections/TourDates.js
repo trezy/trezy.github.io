@@ -1,4 +1,4 @@
-import BaseCollection from 'collections/Base'
+import BaseAPICollection from 'collections/BaseAPI'
 
 
 
@@ -11,7 +11,6 @@ export default class TourDates extends BaseCollection {
   \******************************************************************************/
 
   _generateTourDates () {
-
     return []
   }
 
