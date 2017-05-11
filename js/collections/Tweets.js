@@ -5,8 +5,6 @@ import moment from 'moment'
 import BaseCollection from 'collections/Base'
 import Tweet from 'models/Tweet'
 
-import config from '../../config.json'
-
 
 
 
@@ -222,7 +220,7 @@ export default class Tweets extends BaseCollection {
           return
         }
 
-        media['is' + capitalize(media.type)] = true
+        media['is' + media.type.capitalize()] = true
 
         ret.media.push(media)
       })
