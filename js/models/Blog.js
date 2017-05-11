@@ -1,13 +1,13 @@
 import marked from 'marked'
 import moment from 'moment'
 
-import BaseModel from 'models/Base'
+import BaseAPIModel from 'models/BaseAPI'
 
 
 
 
 
-export default class Blog extends BaseModel {
+export default class Blog extends BaseAPIModel {
 
   /******************************************************************************\
     Private Methods
