@@ -29,7 +29,12 @@ module.exports = function (server, config) {
 
 
   try {
-    twitter.get('statuses/user_timeline', RESTOptions, (error, tweets, response) => {
+    twitter.get('statuses/user_timeline', RESTOptions, (errors, tweets, response) => {
+      if (errors) {
+        errors.forEach(error => console.error('[ERROR]', error.message))
+        throw errors
+      }
+
       console.log('Got Twitter log:', tweets.length, 'tweets')
       console.log('')
 
