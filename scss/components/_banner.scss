@@ -84,3 +84,24 @@ header[role=banner] {
     }
   }
 }
+
+@media (max-width: 750px) {
+  header[role=banner] {
+    bottom: 0;
+    flex-shrink: 0;
+    left: 0;
+    max-width: 70vw;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translateX(-100vw);
+    transition: all 0.5s;
+    width: 70vw;
+    z-index: 2;
+
+    #nav-control:checked + & {
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+  }
+}

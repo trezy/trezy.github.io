@@ -25,10 +25,34 @@ export default class Nav extends Backbone.Marionette.ItemView {
 
 
   /******************************************************************************\
-    Public Methods
+    Getters
   \******************************************************************************/
+
+  get events () {
+    return this._events || (this._events = {
+      'click a': () => {
+        document.querySelector('#nav-control').checked = false
+      },
+      'keyup': event => {
+        console.log(event.which)
+//        if (event.which === 0) {}
+      }
+    })
+  }
 
   get tagName () {
     return 'nav'
+  }
+
+
+
+
+
+  /******************************************************************************\
+    Setters
+  \******************************************************************************/
+
+  set events (value) {
+    this._events = value
   }
 }

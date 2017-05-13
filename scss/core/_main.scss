@@ -13,3 +13,11 @@ main {
     color: white;
   }
 }
+
+@media (max-width: 750px) {
+  main {
+    flex-shrink: 0;
+    padding-top: 6rem;
+    width: 100vw;
+  }
+}
