@@ -20,6 +20,7 @@ header[role=banner] {
   }
 
   nav {
+    flex-shrink: 0;
     overflow: hidden;
     position: relative;
 
@@ -67,10 +68,6 @@ header[role=banner] {
     input[type=checkbox][data-subnav] {
       display: none;
 
-      &:not(:checked) + [data-subnav] {
-        left: 100%;
-      }
-
       + [data-subnav] {
         background-color: white;
         bottom: 0;
@@ -78,8 +75,14 @@ header[role=banner] {
         position: absolute;
         right: 0;
         top: 0;
-        transition: left 0.5s;
+        transform: translateX(0);
+        transition: transform 0.5s;
         width: 100%;
+      }
+
+      &:not(:checked) + [data-subnav] {
+        pointer-events: none;
+        transform: translateX(100%);
       }
     }
   }
@@ -87,6 +90,7 @@ header[role=banner] {
 
 @media (max-width: 750px) {
   header[role=banner] {
+    border-right-width: 0;
     bottom: 0;
     flex-shrink: 0;
     left: 0;
@@ -135,7 +139,6 @@ header[role=banner] {
 
 @media (max-width: 350px) {
   header[role=banner] {
-    border-right-width: 0;
     overflow: auto;
   }
 }
