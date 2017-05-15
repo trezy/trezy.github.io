@@ -97,7 +97,7 @@ header[role=banner] {
     transform: translateX(-100vw);
     transition: all 0.5s;
     width: 70vw;
-    z-index: 2;
+    z-index: 3;
   }
 
   main:before {
@@ -123,5 +123,19 @@ header[role=banner] {
       background-color: rgba(black, 0.8);
       pointer-events: all;
     }
+  }
+}
+
+@media (max-width: 600px) {
+  header[role=banner] {
+    max-width: 100vw;
+    width: 100vw;
+  }
+}
+
+@media (max-width: 350px) {
+  header[role=banner] {
+    border-right-width: 0;
+    overflow: auto;
   }
 }
